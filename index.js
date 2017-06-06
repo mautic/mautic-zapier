@@ -1,13 +1,10 @@
-
-const authentication = require('./authentication');
-
 const App = {
   // This is just shorthand to reference the installed dependencies you have. Zapier will
   // need to know these before we can upload
   version: require('./package.json').version,
   platformVersion: require('zapier-platform-core').version,
 
-  authentication: authentication,
+  authentication: require('./authentication'),
 
   beforeRequest: [
   ],

@@ -1,4 +1,4 @@
-require('should');
+const should = require('should');
 
 const zapier = require('zapier-platform-core');
 
@@ -7,29 +7,32 @@ const appTester = zapier.createAppTester(App);
 
 describe('basic auth app', () => {
 
-  it('automatically has Authorize Header add', (done) => {
-    // Try changing the values of username or password to see how the test method behaves
+  it('auth succcessfully', (done) => {
+    zapier.tools.env.inject();
     const bundle = {
       authData: {
-        username: 'user',
-        password: 'passwd'
+        baseUrl: process.env.TEST_BASE_URL,
+        username: process.env.TEST_BASIC_AUTH_USERNAME,
+        password: process.env.TEST_BASIC_AUTH_PASSWORD
       }
     };
 
     appTester(App.authentication.test, bundle)
       .then((response) => {
         response.status.should.eql(200);
-        response.request.headers.Authorization.should.eql('Basic dXNlcjpwYXNzd2Q=');
+        should.exist(response.json.total);
+        should.not.exist(response.json.error);
         done();
       })
       .catch(done);
   });
 
   it('fails on bad auth', (done) => {
-    // Try changing the values of username or password to see how the test method behaves
+    zapier.tools.env.inject();
     const bundle = {
       authData: {
-        username: 'user',
+        baseUrl: process.env.TEST_BASE_URL,
+        username: process.env.TEST_BASIC_AUTH_USERNAME,
         password: 'badpwd'
       }
     };
@@ -39,7 +42,7 @@ describe('basic auth app', () => {
         done('Should not get here');
       })
       .catch((error) => {
-        error.message.should.containEql('The username and/or password you supplied is incorrect');
+        error.message.should.containEql('API authorization denied.');
         done();
       });
   });
