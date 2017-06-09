@@ -38,22 +38,72 @@ const unsubscribeHook = (z, bundle) => {
     .then((response) => JSON.parse(response.content));
 };
 
-const getContact = (z, bundle) => {
-  // bundle.cleanedRequest will include the parsed JSON object (if it's not a
-  // test poll) and also a .querystring property with the URL's query string.
-  const contact = {
-    id: bundle.cleanedRequest.id,
-    name: bundle.cleanedRequest.name,
-    directions: bundle.cleanedRequest.directions,
-    style: bundle.cleanedRequest.style,
-    authorId: bundle.cleanedRequest.authorId,
-    createdAt: bundle.cleanedRequest.createdAt
-  };
-
-  return [contact];
+const getContactCoreFields = () => {
+  return [
+    {key: 'id', label: 'ID'},
+    {key: 'dateAdded', label: 'Date Added'},
+    {key: 'dateModified', label: 'Date Modified'},
+    {key: 'dateIdentified', label: 'Date Identified'},
+    {key: 'lastActive', label: 'Last Active Date'},
+    {key: 'createdBy', label: 'Created By ID'},
+    {key: 'createdByUser', label: 'Created By User'},
+    {key: 'modifiedBy', label: 'Modified By ID'},
+    {key: 'modifiedByUser', label: 'Modified By User'},
+    {key: 'points', label: 'Points'},
+    {key: 'ownedBy', label: 'OwnedBy ID'},
+    {key: 'ownedByUser', label: 'OwnedBy User'},
+    {key: 'ownedByUsername', label: 'OwnedBy Username'},
+  ];
 };
 
+// Take the ugly webhook request and make a nice tidy contact objects from it
+const getContact = (z, bundle) => {
+  const dirtyContacts = bundle.cleanedRequest['mautic.lead_post_save_update'];
+  const coreFields = getContactCoreFields();
+  const contacts = [];
+
+  for (var key in dirtyContacts) {
+    var dirtyContact = dirtyContacts[key].contact;
+    const contact = {};
+
+    // Fill in the core fields we want to provide
+    coreFields.forEach((field) => {
+      var type = typeof dirtyContact[field.key];
+      if (type !== 'undefined' && (type === 'string' || type === 'number')) {
+        contact[field.key] = dirtyContact[field.key];
+      }
+    });
+
+    // Flatten the custom fields
+    for (var groupKey in dirtyContact.fields) {
+      var fieldGroup = dirtyContact.fields[groupKey];
+      for (var fieldKey in fieldGroup) {
+        var field = fieldGroup[fieldKey];
+        contact[field.alias] = field.value;
+      }
+    }
+
+    // Flatten the owner info
+    if (typeof dirtyContact.owner === 'object') {
+      contact.ownedBy = dirtyContact.owner.id;
+      contact.ownedByUsername = dirtyContact.owner.username;
+      contact.ownedByUser = dirtyContact.owner.firstName+' '+dirtyContact.owner.lastName;
+    } else {
+      contact.ownedBy = null;
+      contact.ownedByUsername = null;
+      contact.ownedByUser = null;
+    }
+
+    contacts.push(contact);
+  };
+
+  return contacts;
+};
+
+// This is used for testing the zap so the user doesn't have to fake the events in Mautic.
+// It must return the same format as the webhook payload
 const getFallbackRealContact = (z, bundle) => {
+  console.log('getFallbackRealContact', bundle);
   // For the test poll, you should get some real data, to aid the setup process.
   const options = {
     url: 'http://57b20fb546b57d1100a3c405.mockapi.io/api/recipes/',
@@ -64,6 +114,30 @@ const getFallbackRealContact = (z, bundle) => {
 
   return z.request(options)
     .then((response) => JSON.parse(response.content));
+};
+
+// Take the custom fields response and build the array of fields in format Zapier expects
+const simplifyFieldArray = (response) => {
+  const fields = getContactCoreFields();
+
+  if (response.fields) {
+    for (var key in response.fields) {
+      var field = response.fields[key];
+      fields.push({key: field.alias, label: field.label});
+    }
+  }
+
+  return fields;
+};
+
+// Dynamically load the contact custom fields from the Mautic instance
+const getContactCustomFields = (z, bundle) => {
+  const options = {
+    url: bundle.authData.baseUrl+'/api/fields/contact',
+  };
+
+  return z.request(options)
+    .then((response) => simplifyFieldArray(JSON.parse(response.content)));
 };
 
 // We recommend writing your triggers separate like this and rolling them
@@ -93,26 +167,12 @@ module.exports = {
     // In cases where Zapier needs to show an example record to the user, but we are unable to get a live example
     // from the API, Zapier will fallback to this hard-coded sample. It should reflect the data structure of
     // returned records, and have obviously dummy values that we can show to any user.
-    sample: {
-      id: 1,
-      createdAt: 1472069465,
-      name: 'Best Spagetti Ever',
-      authorId: 1,
-      directions: '1. Boil Noodles\n2.Serve with sauce',
-      style: 'italian',
-    },
+    sample: require('../fixtures/contactUpdated.js'),
 
     // If the resource can have fields that are custom on a per-user basis, define a function to fetch the custom
     // field definitions. The result will be used to augment the sample.
     // outputFields: () => { return []; }
     // Alternatively, a static field definition should be provided, to specify labels for the fields
-    outputFields: [
-      {key: 'id', label: 'ID'},
-      {key: 'createdAt', label: 'Created At'},
-      {key: 'name', label: 'Name'},
-      {key: 'directions', label: 'Directions'},
-      {key: 'authorId', label: 'Author ID'},
-      {key: 'style', label: 'Style'},
-    ]
+    outputFields: getContactCustomFields
   }
 };

@@ -1,4 +1,3 @@
-const ContactResource = require('./resources/contact');
 const ContactUpdatedTrigger = require('./triggers/contactUpdated');
 const App = {
   // This is just shorthand to reference the installed dependencies you have. Zapier will
@@ -15,7 +14,6 @@ const App = {
   ],
 
   resources: {
-    [ContactResource.key]: ContactResource,
   },
 
   triggers: {
