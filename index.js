@@ -1,3 +1,5 @@
+const ContactResource = require('./resources/contact');
+const ContactUpdatedTrigger = require('./triggers/contactUpdated');
 const App = {
   // This is just shorthand to reference the installed dependencies you have. Zapier will
   // need to know these before we can upload
@@ -13,10 +15,11 @@ const App = {
   ],
 
   resources: {
+    [ContactResource.key]: ContactResource,
   },
 
-  // If you want your trigger to show up, you better include it here!
   triggers: {
+    [ContactUpdatedTrigger.key]: ContactUpdatedTrigger,
   },
 
   // If you want your searches to show up, you better include it here!
