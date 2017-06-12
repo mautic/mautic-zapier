@@ -91,7 +91,7 @@ const cleanContacts = (dirtyContacts) => {
     }
 
     // Flatten the owner info
-    if (typeof dirtyContact.owner === 'object') {
+    if (dirtyContact.owner && typeof dirtyContact.owner === 'object' && dirtyContact.owner.id) {
       contact.ownedBy = dirtyContact.owner.id;
       contact.ownedByUsername = dirtyContact.owner.username;
       contact.ownedByUser = dirtyContact.owner.firstName+' '+dirtyContact.owner.lastName;
