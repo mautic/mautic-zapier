@@ -56,15 +56,18 @@ const getContactCoreFields = () => {
   ];
 };
 
-// Take the ugly webhook request and make a nice tidy contact objects from it
-const getContact = (z, bundle) => {
-  const dirtyContacts = bundle.cleanedRequest['mautic.lead_post_save_update'];
+const cleanContacts = (dirtyContacts) => {
   const coreFields = getContactCoreFields();
   const contacts = [];
 
   for (var key in dirtyContacts) {
-    var dirtyContact = dirtyContacts[key].contact;
+    var dirtyContact = dirtyContacts[key];
     const contact = {};
+
+    // webhook payload stores the contact info to the 'contact' property. API does not.
+    if (typeof dirtyContact.contact !== 'undefined') {
+      dirtyContact = dirtyContact.contact;
+    }
 
     // Fill in the core fields we want to provide
     coreFields.forEach((field) => {
@@ -79,7 +82,11 @@ const getContact = (z, bundle) => {
       var fieldGroup = dirtyContact.fields[groupKey];
       for (var fieldKey in fieldGroup) {
         var field = fieldGroup[fieldKey];
-        contact[field.alias] = field.value;
+
+        // The API response has also 'all' fields which are in different format.
+        if (field && typeof field.alias !== 'undefined') {
+          contact[field.alias] = field.value;
+        }
       }
     }
 
@@ -98,22 +105,26 @@ const getContact = (z, bundle) => {
   };
 
   return contacts;
+}
+
+// Take the ugly webhook request and make a nice tidy contact objects from it
+const getContact = (z, bundle) => {
+  const dirtyContacts = bundle.cleanedRequest['mautic.lead_post_save_update'];
+
+  return cleanContacts(dirtyContacts);
 };
 
 // This is used for testing the zap so the user doesn't have to fake the events in Mautic.
 // It must return the same format as the webhook payload
 const getFallbackRealContact = (z, bundle) => {
-  console.log('getFallbackRealContact', bundle);
+
   // For the test poll, you should get some real data, to aid the setup process.
   const options = {
-    url: 'http://57b20fb546b57d1100a3c405.mockapi.io/api/recipes/',
-    params: {
-      style: bundle.inputData.style
-    }
+    url: bundle.authData.baseUrl+'/api/contacts?limit=1&search=!is:anonymous',
   };
 
   return z.request(options)
-    .then((response) => JSON.parse(response.content));
+    .then((response) => (cleanContacts(JSON.parse(response.content).contacts)));
 };
 
 // Take the custom fields response and build the array of fields in format Zapier expects

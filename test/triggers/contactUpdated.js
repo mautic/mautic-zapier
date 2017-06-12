@@ -148,28 +148,31 @@ describe('contact triggers', () => {
         .catch(done);
     });
 
-    // it('should load recipe from list', (done) => {
-    //   const bundle = {
-    //     inputData: {
-    //       style: 'mediterranean'
-    //     },
-    //     meta: {
-    //       frontend: true
-    //     }
-    //   };
+    it('should load contact from list', (done) => {
+      zapier.tools.env.inject();
+      const bundle = {
+        authData: {
+          baseUrl: process.env.TEST_BASE_URL,
+          username: process.env.TEST_BASIC_AUTH_USERNAME,
+          password: process.env.TEST_BASIC_AUTH_PASSWORD
+        },
+        meta: {
+          frontend: true
+        }
+      };
 
-    //   appTester(App.triggers.recipe.operation.performList, bundle)
-    //     .then(results => {
-    //       results.length.should.be.greaterThan(1);
+      appTester(App.triggers.contactUpdated.operation.performList, bundle)
+        .then(results => {
+          results.length.should.be.greaterThan(0);
 
-    //       const firstRecipe = results[0];
-    //       firstRecipe.name.should.eql('name 1');
-    //       firstRecipe.directions.should.eql('directions 1');
+          const firstContact = results[0];
+          firstContact.id.should.be.greaterThan(0);
+          firstContact.email.should.not.be.empty();
 
-    //       done();
-    //     })
-    //     .catch(done);
-    // });
+          done();
+        })
+        .catch(done);
+    });
   });
 
 });
