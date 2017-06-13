@@ -19,7 +19,7 @@ const test = (z, bundle) => {
 module.exports = {
   type: 'basic',
   fields: [
-    {key: 'baseUrl', type: 'string'}
+    {key: 'baseUrl', type: 'string', required: true}
   ],
 
   // The test method allows Zapier to verify that the credentials a user provides are valid. We'll execute this
