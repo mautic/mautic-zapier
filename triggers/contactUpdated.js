@@ -1,9 +1,6 @@
 const TriggerHelper = require('./triggerHelper');
 const triggerHelper = new TriggerHelper('mautic.lead_post_save_update', 'Trigger Zapier about contact update events');
 
-// triggerHelper.setType('mautic.lead_post_save_update');
-// triggerHelper.setHookDescription('Trigger Zapier about contact update events');
-
 module.exports = {
   key: 'contactUpdated',
   noun: 'Contact',

@@ -1,118 +1,24 @@
+const Contact = require('../entities/contact');
+const Field = require('../entities/field');
+
 TriggerHelper = function(triggerType, hookDescription) {
   this.type = triggerType;
-
   this.hookDescription = hookDescription;
 
-  this.getContactCoreFields = () => {
-    return [
-      {key: 'id', label: 'ID'},
-      {key: 'dateAdded', label: 'Date Added'},
-      {key: 'dateModified', label: 'Date Modified'},
-      {key: 'dateIdentified', label: 'Date Identified'},
-      {key: 'lastActive', label: 'Last Active Date'},
-      {key: 'createdBy', label: 'Created By ID'},
-      {key: 'createdByUser', label: 'Created By User'},
-      {key: 'modifiedBy', label: 'Modified By ID'},
-      {key: 'modifiedByUser', label: 'Modified By User'},
-      {key: 'points', label: 'Points'},
-      {key: 'ownedBy', label: 'OwnedBy ID'},
-      {key: 'ownedByUser', label: 'OwnedBy User'},
-      {key: 'ownedByUsername', label: 'OwnedBy Username'},
-    ];
-  };
-
-  this.cleanContacts = (dirtyContacts) => {
-    const coreFields = this.getContactCoreFields();
-    const contacts = [];
-
-    for (var key in dirtyContacts) {
-      var dirtyContact = dirtyContacts[key];
-      const contact = {};
-
-      // webhook payload stores the contact info to the 'contact' property. API does not.
-      if (typeof dirtyContact.contact !== 'undefined') {
-        dirtyContact = dirtyContact.contact;
-      }
-
-      // Fill in the core fields we want to provide
-      coreFields.forEach((field) => {
-        var type = typeof dirtyContact[field.key];
-        if (type !== 'undefined' && (type === 'string' || type === 'number')) {
-          contact[field.key] = dirtyContact[field.key];
-        }
-      });
-
-      // Flatten the custom fields
-      for (var groupKey in dirtyContact.fields) {
-        var fieldGroup = dirtyContact.fields[groupKey];
-        for (var fieldKey in fieldGroup) {
-          var field = fieldGroup[fieldKey];
-
-          // The API response has also 'all' fields which are in different format.
-          if (field && typeof field.alias !== 'undefined') {
-            contact[field.alias] = field.value;
-          }
-        }
-      }
-
-      // Flatten the owner info
-      if (dirtyContact.owner && typeof dirtyContact.owner === 'object' && dirtyContact.owner.id) {
-        contact.ownedBy = dirtyContact.owner.id;
-        contact.ownedByUsername = dirtyContact.owner.username;
-        contact.ownedByUser = dirtyContact.owner.firstName+' '+dirtyContact.owner.lastName;
-      } else {
-        contact.ownedBy = null;
-        contact.ownedByUsername = null;
-        contact.ownedByUser = null;
-      }
-
-      contacts.push(contact);
-    };
-
-    return contacts;
-  };
-
-  this.simplifyFieldArray = (response) => {
-    const fields = this.getContactCoreFields();
-
-    if (response.fields) {
-      for (var key in response.fields) {
-        var field = response.fields[key];
-        fields.push({key: field.alias, label: field.label});
-      }
-    }
-
-    return fields;
-  };
-
   this.getContactCustomFields = (z, bundle) => {
-    const options = {
-      url: bundle.authData.baseUrl+'/api/fields/contact',
-    };
-
-    return z.request(options)
-      .then((response) => {
-        return this.simplifyFieldArray(JSON.parse(response.content));
-      });
+    const field = new Field(z, bundle);
+    return field.getList('contact');
   };
 
   this.getFallbackRealContact = (z, bundle) => {
-
-    // For the test poll, you should get some real data, to aid the setup process.
-    const options = {
-      url: bundle.authData.baseUrl+'/api/contacts?limit=1&search=!is:anonymous',
-    };
-
-    return z.request(options)
-      .then((response) => {
-        return this.cleanContacts(JSON.parse(response.content).contacts)
-    });
+    const contact = new Contact(z, bundle);
+    return contact.getList(z, bundle, {limit: 1, search: '!is:anonymous'});
   };
 
   this.getContact = (z, bundle) => {
     const dirtyContacts = bundle.cleanedRequest[this.type];
-
-    return this.cleanContacts(dirtyContacts);
+    const contact = new Contact();
+    return contact.cleanContacts(dirtyContacts);
   };
 
   this.unsubscribeHook = (z, bundle) => {
