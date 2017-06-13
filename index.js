@@ -1,5 +1,6 @@
 const ContactUpdatedTrigger = require('./triggers/contactUpdated');
 const ContactCreatedTrigger = require('./triggers/contactCreated');
+const PointsChangedTrigger = require('./triggers/pointsChanged');
 
 const App = {
   // This is just shorthand to reference the installed dependencies you have. Zapier will
@@ -21,6 +22,7 @@ const App = {
   triggers: {
     [ContactUpdatedTrigger.key]: ContactUpdatedTrigger,
     [ContactCreatedTrigger.key]: ContactCreatedTrigger,
+    [PointsChangedTrigger.key]: PointsChangedTrigger,
   },
 
   // If you want your searches to show up, you better include it here!
