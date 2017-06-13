@@ -1,9 +1,9 @@
-module.exports = {
-  type: null,
-  setType: (type) => {
-    this.type = type;
-  },
-  getContactCoreFields: () => {
+TriggerHelper = function(triggerType, hookDescription) {
+  this.type = triggerType;
+
+  this.hookDescription = hookDescription;
+
+  this.getContactCoreFields = () => {
     return [
       {key: 'id', label: 'ID'},
       {key: 'dateAdded', label: 'Date Added'},
@@ -19,9 +19,10 @@ module.exports = {
       {key: 'ownedByUser', label: 'OwnedBy User'},
       {key: 'ownedByUsername', label: 'OwnedBy Username'},
     ];
-  },
-  cleanContacts: (dirtyContacts) => {
-    const coreFields = module.exports.getContactCoreFields();
+  };
+
+  this.cleanContacts = (dirtyContacts) => {
+    const coreFields = this.getContactCoreFields();
     const contacts = [];
 
     for (var key in dirtyContacts) {
@@ -69,9 +70,10 @@ module.exports = {
     };
 
     return contacts;
-  },
-  simplifyFieldArray: (response) => {
-    const fields = module.exports.getContactCoreFields();
+  };
+
+  this.simplifyFieldArray = (response) => {
+    const fields = this.getContactCoreFields();
 
     if (response.fields) {
       for (var key in response.fields) {
@@ -81,18 +83,20 @@ module.exports = {
     }
 
     return fields;
-  },
-  getContactCustomFields: (z, bundle) => {
+  };
+
+  this.getContactCustomFields = (z, bundle) => {
     const options = {
       url: bundle.authData.baseUrl+'/api/fields/contact',
     };
 
     return z.request(options)
       .then((response) => {
-        return module.exports.simplifyFieldArray(JSON.parse(response.content));
+        return this.simplifyFieldArray(JSON.parse(response.content));
       });
-  },
-  getFallbackRealContact: (z, bundle) => {
+  };
+
+  this.getFallbackRealContact = (z, bundle) => {
 
     // For the test poll, you should get some real data, to aid the setup process.
     const options = {
@@ -101,15 +105,17 @@ module.exports = {
 
     return z.request(options)
       .then((response) => {
-        return module.exports.cleanContacts(JSON.parse(response.content).contacts)
+        return this.cleanContacts(JSON.parse(response.content).contacts)
     });
-  },
-  getContact: (z, bundle) => {
+  };
+
+  this.getContact = (z, bundle) => {
     const dirtyContacts = bundle.cleanedRequest[this.type];
 
-    return module.exports.cleanContacts(dirtyContacts);
-  },
-  unsubscribeHook: (z, bundle) => {
+    return this.cleanContacts(dirtyContacts);
+  };
+
+  this.unsubscribeHook = (z, bundle) => {
     // bundle.subscribeData contains the parsed response JSON from the subscribe
     // request made initially.
     const hookId = bundle.subscribeData.hook.id;
@@ -124,15 +130,16 @@ module.exports = {
     // You may return a promise or a normal data structure from any perform method.
     return z.request(options)
       .then((response) => JSON.parse(response.content));
-  },
-  subscribeHook: (z, bundle) => {
+  };
+
+  this.subscribeHook = (z, bundle) => {
 
     // bundle.targetUrl has the Hook URL this app should call when a recipe is created.
     const data = {
       webhookUrl: bundle.targetUrl,
-      name: 'Trigger Zapier about contact update events',
+      name: this.hookDescription,
       description: 'Created via Zapier',
-      triggers: ['mautic.lead_post_save_update']
+      triggers: [this.type]
     };
 
     // You can build requests and our client will helpfully inject all the variables
@@ -146,5 +153,7 @@ module.exports = {
     // You may return a promise or a normal data structure from any perform method.
     return z.request(options)
       .then((response) => JSON.parse(response.content));
-  },
+  };
 };
+
+module.exports = TriggerHelper;

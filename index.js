@@ -1,4 +1,6 @@
 const ContactUpdatedTrigger = require('./triggers/contactUpdated');
+const ContactCreatedTrigger = require('./triggers/contactCreated');
+
 const App = {
   // This is just shorthand to reference the installed dependencies you have. Zapier will
   // need to know these before we can upload
@@ -18,6 +20,7 @@ const App = {
 
   triggers: {
     [ContactUpdatedTrigger.key]: ContactUpdatedTrigger,
+    [ContactCreatedTrigger.key]: ContactCreatedTrigger,
   },
 
   // If you want your searches to show up, you better include it here!

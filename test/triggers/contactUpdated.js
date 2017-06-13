@@ -9,9 +9,9 @@ describe('contact triggers', () => {
 
   describe('new contact updated trigger', () => {
 
-  var subscribeData = null;
+    var subscribeData = null;
 
-    it('should create and delete a contact update hook', (done) => {
+    it('should create a contact update hook', (done) => {
       zapier.tools.env.inject();
       const bundle = {
         targetUrl: 'http://provided.by?zapier',
