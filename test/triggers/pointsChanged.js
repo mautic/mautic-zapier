@@ -114,7 +114,8 @@ describe('contact triggers', () => {
                 twitter: null,
                 ownedBy: null,
                 ownedByUsername: null,
-                ownedByUser: null
+                ownedByUser: null,
+                tags: ''
               }
             ]
           );

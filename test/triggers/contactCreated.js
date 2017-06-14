@@ -112,7 +112,8 @@ describe('contact triggers', () => {
                 twitter: 'johndoe',
                 ownedBy: 1,
                 ownedByUsername: 'admin',
-                ownedByUser: 'John Doe'
+                ownedByUser: 'John Doe',
+                tags: ''
               }
             ]
           );

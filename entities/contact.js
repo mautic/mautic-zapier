@@ -57,7 +57,29 @@ Contact = function(z, bundle) {
       contact.ownedByUser = null;
     }
 
+    // Flatten the tags
+    contact.tags = '';
+    if (typeof dirtyContact.tags === 'object' && dirtyContact.tags.length) {
+      for (var key in dirtyContact.tags) {
+        if (typeof dirtyContact.tags[key].tag !== 'undefined' && dirtyContact.tags[key].tag) {
+          if (contact.tags.length > 0) {
+            contact.tags += ','
+          }
+          contact.tags += dirtyContact.tags[key].tag;
+        }
+      }
+    }
+
     return contact;
+  };
+
+  this.modifyDataBeforeCreate = (data) => {
+    // convert comma separated list of tags into array
+    if (typeof data.tags === 'string') {
+      data.tags = data.tags.split(',');
+    }
+
+    return data;
   };
 
   this.getList = (params) => {
@@ -76,7 +98,7 @@ Contact = function(z, bundle) {
     const requestData = {
       url: this.route+'/new',
       method: 'POST',
-      body: JSON.stringify(data),
+      body: JSON.stringify(this.modifyDataBeforeCreate(data)),
       headers: {
         'content-type': 'application/json'
       }

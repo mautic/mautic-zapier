@@ -16,6 +16,7 @@ describe('creates', () => {
           lastname: 'Doe',
           email: 'john@doe.email',
           points: 7,
+          tags: 'zapier, api, -deleted'
         },
         authData: {
           baseUrl: process.env.TEST_BASE_URL,
@@ -30,6 +31,7 @@ describe('creates', () => {
           result.lastname.should.equal('Doe');
           result.email.should.equal('john@doe.email');
           result.points.should.equal(7);
+          result.tags.should.equal('zapier,api');
           done();
         })
         .catch(done);

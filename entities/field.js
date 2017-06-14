@@ -19,6 +19,7 @@ Field = function(z, bundle) {
       {key: 'ownedBy', label: 'OwnedBy ID', type: 'integer'},
       {key: 'ownedByUser', label: 'OwnedBy User'},
       {key: 'ownedByUsername', label: 'OwnedBy Username'},
+      {key: 'tags', label: 'Tags', helpText: 'Comma separated tags. Use - before the tag if you want to remove it'},
     ];
   };
 
