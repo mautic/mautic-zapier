@@ -76,7 +76,7 @@ describe('form triggers', () => {
         }
       };
 
-      appTester(App.triggers.getSimpleListOfForms, bundle)
+      appTester(App.triggers.formSubmitted.operation.getSimpleListOfForms, bundle)
         .then(forms => {
 
           if (forms) {

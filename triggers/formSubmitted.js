@@ -114,16 +114,15 @@ module.exports = {
       var form = new Form(z, bundle);
       return form.getSimpleList();
     },
-    inputFields: [
-      {key: 'formId', type: 'integer', label: 'Form ID', dynamic: 'formSubmittedGetSimpleListOfForms.id.name', helpText: 'Select the form for the submission trigger'},
-      // {key: 'contact', label: 'Contact Fields', children: triggerHelper.getContactCustomFields},
-    ],
     type: 'hook',
     performSubscribe: triggerHelper.subscribeHook,
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: getSubmission,
     performList: performList,
     sample: require('../fixtures/formSubmitted.js'),
-    outputFields: triggerHelper.getContactCustomFields
+    outputFields: [
+      {key: 'formId', type: 'integer', label: 'Form ID', dynamic: 'formSubmittedGetSimpleListOfForms.id.name', helpText: 'Select the form for the submission trigger'},
+      // {key: 'contact', label: 'Contact Fields', children: triggerHelper.getContactCustomFields},
+    ]
   }
 };
