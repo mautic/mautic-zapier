@@ -71,7 +71,7 @@ const getEmailOpen = (z, bundle) => {
 };
 
 const getFallbackRealEmail = (z, bundle) => {
-  return cleanEmailOpens(sample);
+  return cleanEmailOpens(sample['mautic.email_on_open']);
 };
 
 const getEmailFields = () => {
