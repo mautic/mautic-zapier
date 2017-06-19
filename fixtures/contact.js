@@ -1,4 +1,4 @@
-module.export = {
+module.exports = {
     "contact": {
         "isPublished": true,
         "dateAdded": "2017-06-13T09:15:47+00:00",

@@ -90,7 +90,7 @@ Contact = function(z, bundle) {
 
     return z.request(options)
       .then((response) => {
-        return this.cleanContacts(JSON.parse(response.content).contacts)
+        return JSON.parse(response.content).contacts
     });
   };
 

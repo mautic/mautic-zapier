@@ -12,7 +12,7 @@ TriggerHelper = function(triggerType, hookDescription) {
 
   this.getFallbackRealContact = (z, bundle) => {
     const contact = new Contact(z, bundle);
-    return contact.getList({limit: 1, search: '!is:anonymous'});
+    return contact.getList({limit: 1, search: '!is:anonymous'}).then((response) => contact.cleanContacts(response));
   };
 
   this.getContact = (z, bundle) => {

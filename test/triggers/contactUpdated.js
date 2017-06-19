@@ -168,7 +168,7 @@ describe('contact triggers', () => {
 
           const firstContact = results[0];
           firstContact.id.should.be.greaterThan(0);
-          firstContact.email.should.not.be.empty();
+          firstContact.should.have.property('email');
 
           done();
         })
