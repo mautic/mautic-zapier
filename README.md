@@ -2,16 +2,16 @@
 
 This Zapier app is meant to be available in the Zapier Editor. You don't need to submit this app yourself, it will be there for you to select it in the Zapier user interface.
 
-This app adds these triggers:
-- [x] Contact Created - contains contact info and field values
-- [x] Contact Updated - contains contact info and field values
-- [x] Contact Points Changed - contains contact info, point value and field values
-- [x] Email Opened - contains contact info and field values and info about the email
-- [x] Page Hit - contains contact info and field values, info about the page hit and the page itself
-- [ ] Form Submitted - contains contact info and field values, info about the form and about the submission including submitted values
+### Available Triggers
+- [x] **Contact Created** - _contains contact info and field values_
+- [x] **Contact Updated** - _contains contact info and field values_
+- [x] **Contact Points** Changed** - _contains contact info, point value and field values_
+- [x] **Email Opened** - _contains contact info and field values and info about the email_
+- [x] **Page Hit** - _contains contact info and field values, info about the page hit and the page itself_
+- [ ] **Form Submitted** - _contains contact info and field values, info about the form and about the submission including submitted values_
 
-And these actions
-- [x] Create Contact
+### Available Actions
+- [x] **Create Contact**
 
 ## Requirements
 
