@@ -1,8 +1,20 @@
 # Zapier app for connecting Mautic
 
+## Requirements
+
+1. Mautic version 2.9.0 or newer.
+2. SSL - the basic authentication requires HTTPS to be secure.
+
 ## Prepare your Mautic
 
-This Zapier app use Basic Authentication to access Mautic API. You have to enable it first. Go to Mautic's global configuration / API Settings and set __API enabled?__ to __Yes__ and __Enable HTTP basic auth?__ to __Yes__.
+This Zapier app use Basic Authentication to access Mautic API. You have to enable it first.
+
+1. Go to Mautic's global configuration / API Settings.
+2. Set __API enabled?__ to __Yes__.
+3. Set __Enable HTTP basic auth?__ to __Yes__.
+4. Save the configuration.
+
+Now you are able to create Zapier actions and triggers with your Mautic installation.
 
 ## Development notes
 
