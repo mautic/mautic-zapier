@@ -67,34 +67,6 @@ describe('form triggers', () => {
 
     });
 
-    it('should load simple list of forms', (done) => {
-      const bundle = {
-        authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        }
-      };
-
-      appTester(App.triggers.formSubmitted.operation.getSimpleListOfForms, bundle)
-        .then(forms => {
-
-          if (forms) {
-            for (var i in forms) {
-              var form = forms[i];
-              form.should.have.property('name');
-              form.should.have.property('id');
-              form.id.should.be.greaterThan(0);
-            }
-          } else {
-            console.warning('Your Mautic instance does not contain any forms to test with')
-          }
-
-          done();
-        })
-        .catch(done);
-    });
-
     it('should load a submission via API', (done) => {
       const bundle = {
         authData: {
@@ -121,6 +93,8 @@ describe('form triggers', () => {
           submission.should.have.property('page');
           submission.should.have.property('results');
           submission.should.have.property('contact');
+          submission.results.should.not.be.empty();
+          submission.contact.should.not.be.empty();
           submission.contact.id.should.be.greaterThan(0);
 
           done();

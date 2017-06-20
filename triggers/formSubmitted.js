@@ -65,12 +65,14 @@ const guessFieldValue = (field) => {
 const fakeSubmissionObjectFromForm = (form, contact) => {
   var results = {};
 
-  for (var i in form.fields) {
-    var field = form.fields[i];
-    if (field.type === 'button') {
-      continue;
+  if (form.fields) {
+    for (var i in form.fields) {
+      var field = form.fields[i];
+      if (field.type === 'button') {
+        continue;
+      }
+      results[field.alias] = guessFieldValue(field);
     }
-    results[field.alias] = guessFieldValue(field);
   }
 
   var submission = {
@@ -91,13 +93,13 @@ const performList = (z, bundle) => {
   const form = new Form(z, bundle);
   const contact = new Contact(z, bundle);
 
-  return form.getItem(bundle.inputData.formId).then((form) => {
+  return form.getItem(bundle.inputData.formId).then((fetchedForm) => {
     return contact.getList({limit: 1, search: '!is:anonymous'}).then((contacts) => {
       var fetchedContact = null;
       for (var i in contacts) {
         fetchedContact = contacts[i];
       }
-      return cleanSubmissions([fakeSubmissionObjectFromForm(form, fetchedContact)]);
+      return cleanSubmissions([fakeSubmissionObjectFromForm(fetchedForm, fetchedContact)]);
     });
   });
 };
@@ -110,19 +112,14 @@ module.exports = {
     description: 'Trigger when a new form submission is created.'
   },
   operation: {
-    getSimpleListOfForms: (z, bundle) => {
-      var form = new Form(z, bundle);
-      return form.getSimpleList();
-    },
     type: 'hook',
+    inputFields: [
+      {key: 'formId', type: 'integer', label: 'Form ID', dynamic: 'forms.id.name', helpText: 'Select the form for the submission trigger'},
+    ],
     performSubscribe: triggerHelper.subscribeHook,
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: getSubmission,
     performList: performList,
     sample: require('../fixtures/formSubmitted.js'),
-    outputFields: [
-      {key: 'formId', type: 'integer', label: 'Form ID', dynamic: 'formSubmittedGetSimpleListOfForms.id.name', helpText: 'Select the form for the submission trigger'},
-      // {key: 'contact', label: 'Contact Fields', children: triggerHelper.getContactCustomFields},
-    ]
   }
 };
