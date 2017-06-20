@@ -1,5 +1,18 @@
 # Zapier app for connecting Mautic
 
+This Zapier app is meant to be available in the Zapier Editor. You don't need to submit this app yourself, it will be there for you to select it in the Zapier user interface.
+
+This app adds these triggers:
+- [*] Contact Created - contains contact info and field values
+- [*] Contact Updated - contains contact info and field values
+- [*] Contact Points Changed - contains contact info, point value and field values
+- [*] Email Opened - contains contact info and field values and info about the email
+- [*] Page Hit - contains contact info and field values, info about the page hit and the page itself
+- [ ] Form Submitted - contains contact info and field values, info about the form and about the submission including submitted values
+
+And these actions
+- [*] Create Contact
+
 ## Requirements
 
 1. Mautic version 2.9.0 or newer.
