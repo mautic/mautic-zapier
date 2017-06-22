@@ -115,7 +115,7 @@ module.exports = {
   key: 'emailOpened',
   noun: 'Email',
   display: {
-    label: 'Email opened',
+    label: 'Email Opened',
     description: 'Trigger on a contact email open.'
   },
   operation: {

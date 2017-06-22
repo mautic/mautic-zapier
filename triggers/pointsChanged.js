@@ -5,7 +5,7 @@ module.exports = {
   key: 'pointsChanged',
   noun: 'Contact',
   display: {
-    label: 'Contact changes points',
+    label: 'Contact Points Changed',
     description: 'Trigger on a contact points change.'
   },
   operation: {

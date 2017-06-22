@@ -98,7 +98,7 @@ module.exports = {
   key: 'pageHit',
   noun: 'Page',
   display: {
-    label: 'Page hit',
+    label: 'Page Hit',
     description: 'Trigger on a contact page hit.'
   },
   operation: {
