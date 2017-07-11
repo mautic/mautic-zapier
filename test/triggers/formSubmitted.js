@@ -75,7 +75,7 @@ describe('form triggers', () => {
           password: process.env.TEST_BASIC_AUTH_PASSWORD
         },
         inputData: {
-          formId: 3,
+          formId: 1,
         },
       };
 
@@ -104,7 +104,10 @@ describe('form triggers', () => {
 
     it('should load submission from fake hook', (done) => {
       const bundle = {
-        cleanedRequest: App.triggers.formSubmitted.operation.sample
+        cleanedRequest: App.triggers.formSubmitted.operation.sample,
+        inputData: {
+          formId: 3,
+        },
       };
 
       appTester(App.triggers.formSubmitted.operation.perform, bundle)
@@ -169,6 +172,23 @@ describe('form triggers', () => {
               }
             ]
           );
+
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should refuse submission from fake hook because of form ID mismatch', (done) => {
+      const bundle = {
+        cleanedRequest: App.triggers.formSubmitted.operation.sample,
+        inputData: {
+        },
+      };
+
+      appTester(App.triggers.formSubmitted.operation.perform, bundle)
+        .then(submissions => {
+
+          submissions.should.eql([]);
 
           done();
         })

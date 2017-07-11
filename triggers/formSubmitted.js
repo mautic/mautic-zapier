@@ -4,11 +4,16 @@ const Contact = require('../entities/contact');
 const triggerType = 'mautic.form_on_submit';
 const triggerHelper = new TriggerHelper(triggerType, 'Trigger Zapier about form submit events');
 
-const cleanSubmission = (dirtySubmission) => {
+const cleanSubmission = (dirtySubmission, formId) => {
   var submission = {};
 
   if (dirtySubmission.submission) {
     dirtySubmission = dirtySubmission.submission;
+  }
+
+  // Process only the form submissions which match the input form ID
+  if (dirtySubmission.form.id != formId) {
+    return null;
   }
 
   submission.id = dirtySubmission.id;
@@ -37,11 +42,20 @@ const cleanSubmission = (dirtySubmission) => {
   return submission;
 };
 
-const cleanSubmissions = (dirtySubmissions) => {
+const cleanSubmissions = (dirtySubmissions, bundle) => {
+  var formId;
+
+  if (bundle.inputData && bundle.inputData.formId) {
+    formId = bundle.inputData.formId;
+  }
+
   const submissions = [];
 
   for (var key in dirtySubmissions) {
-    submissions.push(cleanSubmission(dirtySubmissions[key]));
+    var submission = cleanSubmission(dirtySubmissions[key], formId);
+    if (submission) {
+      submissions.push(submission);
+    }
   };
 
   return submissions;
@@ -49,7 +63,7 @@ const cleanSubmissions = (dirtySubmissions) => {
 
 const getSubmission = (z, bundle) => {
   const dirtySubmissions = bundle.cleanedRequest[triggerType];
-  return cleanSubmissions(dirtySubmissions);
+  return cleanSubmissions(dirtySubmissions, bundle);
 };
 
 const guessFieldValue = (field) => {
@@ -99,7 +113,7 @@ const performList = (z, bundle) => {
       for (var i in contacts) {
         fetchedContact = contacts[i];
       }
-      return cleanSubmissions([fakeSubmissionObjectFromForm(fetchedForm, fetchedContact)]);
+      return cleanSubmissions([fakeSubmissionObjectFromForm(fetchedForm, fetchedContact)], bundle);
     });
   });
 };
