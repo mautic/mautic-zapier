@@ -11,12 +11,7 @@ const App = {
   version: require('./package.json').version,
   platformVersion: require('zapier-platform-core').version,
   authentication: require('./authentication'),
-  beforeRequest: [
-  ],
-  afterResponse: [
-  ],
-  resources: {
-  },
+  beforeRequest: require('./middlewares/beforeRequest'),
   triggers: {
     [ContactUpdatedTrigger.key]: ContactUpdatedTrigger,
     [ContactCreatedTrigger.key]: ContactCreatedTrigger,
@@ -26,11 +21,9 @@ const App = {
     [EmailOpenedTrigger.key]: EmailOpenedTrigger,
     [PageHitTrigger.key]: PageHitTrigger,
   },
-  searches: {
-  },
   creates: {
     [contactCreate.key]: contactCreate
-  }
+  },
 };
 
 module.exports = App;
