@@ -6,7 +6,7 @@ module.exports = {
   noun: 'Contact',
   display: {
     label: 'Updated Contact',
-    description: 'Trigger when an existing contact is updated.'
+    description: 'Triggers when an existing contact is updated.'
   },
   operation: {
     type: 'hook',

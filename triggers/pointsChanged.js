@@ -6,7 +6,7 @@ module.exports = {
   noun: 'Contact',
   display: {
     label: 'Contact Points Changed',
-    description: 'Trigger on a contact points change.'
+    description: 'Triggers on a contact points change.'
   },
   operation: {
     type: 'hook',

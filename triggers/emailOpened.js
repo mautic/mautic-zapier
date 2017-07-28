@@ -116,7 +116,7 @@ module.exports = {
   noun: 'Email',
   display: {
     label: 'Email Opened',
-    description: 'Trigger on a contact email open.'
+    description: 'Triggers on a contact email open.'
   },
   operation: {
     type: 'hook',

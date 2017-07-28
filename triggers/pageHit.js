@@ -99,7 +99,7 @@ module.exports = {
   noun: 'Page',
   display: {
     label: 'Page Hit',
-    description: 'Trigger on a contact page hit.'
+    description: 'Triggers on a contact page hit.'
   },
   operation: {
     type: 'hook',
