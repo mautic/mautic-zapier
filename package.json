@@ -1,6 +1,6 @@
 {
   "name": "zapier-platform-example-app-basic-auth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An example app for the Zapier platform.",
   "repository": "zapier/zapier-platform-example-app-basic-auth",
   "homepage": "https://zapier.com/",
