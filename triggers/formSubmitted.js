@@ -123,7 +123,8 @@ module.exports = {
   noun: 'Form',
   display: {
     label: 'Submitted Form',
-    description: 'Triggers when a new form submission is created.'
+    description: 'Triggers when a new form submission is created.',
+    important: true
   },
   operation: {
     type: 'hook',
