@@ -100,7 +100,7 @@ describe('form triggers', () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(5000);
 
     it('should load submission from fake hook', (done) => {
       const bundle = {
