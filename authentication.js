@@ -8,7 +8,12 @@ const test = (z, bundle) => {
   return z.request({
       url: bundle.authData.baseUrl+'/api/contacts?limit=1&minimal=1',
     }).then((response) => {
-      if (response.json.errors) {
+
+      if (typeof response.json === 'undefined') {
+        throw new Error('The URL you provided ('+bundle.authData.baseUrl+') is not the base URL of a Mautic instance');
+      }
+
+      if (response.json && response.json.errors) {
         throw new Error(response.json.errors[0].message);
       }
 
