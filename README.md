@@ -2,6 +2,12 @@
 
 This Zapier app is meant to be available in the Zapier Editor. You don't need to submit this app yourself, it will be there for you to select it in the Zapier user interface.
 
+## Invitation only
+
+This app is currently going through Zapier review process before it will be available in the Zapier app library. Untill then the app is in the invitation mode. Follow this URL to enable the Mautic app for your Zapier account:
+
+[https://zapier.com/platform/public-invite/670/2358fe9536c52e9bf40d510b42bba45f/](https://zapier.com/platform/public-invite/670/2358fe9536c52e9bf40d510b42bba45f/)
+
 ### Available Triggers
 - [x] **Contact Created** - _contains contact info and field values_
 - [x] **Contact Updated** - _contains contact info and field values_
