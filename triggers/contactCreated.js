@@ -5,7 +5,7 @@ module.exports = {
   key: 'contactCreated',
   noun: 'Contact',
   display: {
-    label: 'Created Contact',
+    label: 'New Contact',
     description: 'Triggers when a new contact is created.',
     important: true
   },
