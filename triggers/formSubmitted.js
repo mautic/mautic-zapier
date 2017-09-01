@@ -123,13 +123,13 @@ module.exports = {
   noun: 'Form',
   display: {
     label: 'Submitted Form',
-    description: 'Triggers when a new form submission is created.',
+    description: 'Triggers when a form is submitted.',
     important: true
   },
   operation: {
     type: 'hook',
     inputFields: [
-      {key: 'formId', type: 'integer', label: 'Form ID', dynamic: 'forms.id.name', helpText: 'Select the form for the submission trigger'},
+      {key: 'formId', type: 'integer', label: 'Form ID', dynamic: 'forms.id.name', helpText: 'Select the form for the submission trigger', required: true},
     ],
     performSubscribe: triggerHelper.subscribeHook,
     performUnsubscribe: triggerHelper.unsubscribeHook,

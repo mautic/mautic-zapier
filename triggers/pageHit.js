@@ -97,8 +97,8 @@ module.exports = {
   key: 'pageHit',
   noun: 'Page',
   display: {
-    label: 'Page Hit',
-    description: 'Triggers on a contact page hit.'
+    label: 'New Page Hit',
+    description: 'Triggers when a landing page is visited by a contact.'
   },
   operation: {
     type: 'hook',
