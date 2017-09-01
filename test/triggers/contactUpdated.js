@@ -92,58 +92,12 @@ describe('contact triggers', () => {
     it('should load contact from fake hook', (done) => {
       zapier.tools.env.inject();
       const bundle = {
-        cleanedRequest: require('../../fixtures/contactUpdated.js')
+        cleanedRequest: require('../../fixtures/requests/contactUpdated.js')
       };
 
       appTester(App.triggers.contactUpdated.operation.perform, bundle)
         .then(contacts => {
-
-          contacts.should.eql(
-            [
-              {
-                id: 12,
-                dateAdded: '2017-06-09T11:46:53+00:00',
-                dateModified: '2017-06-09T11:49:02+00:00',
-                dateIdentified: '2017-06-09T11:46:53+00:00',
-                createdBy: 1,
-                createdByUser: 'John Doe',
-                modifiedBy: 1,
-                modifiedByUser: 'John Doe',
-                points: 0,
-                title: null,
-                firstname: 'John',
-                lastname: 'Doe',
-                company: 'Mautic',
-                position: null,
-                email: 'john@doe.email',
-                mobile: null,
-                phone: null,
-                fax: null,
-                address1: null,
-                address2: null,
-                city: null,
-                state: null,
-                zipcode: null,
-                country: null,
-                preferred_locale: null,
-                attribution_date: '',
-                attribution: null,
-                website: null,
-                facebook: null,
-                foursquare: null,
-                googleplus: null,
-                instagram: null,
-                linkedin: null,
-                skype: null,
-                twitter: null,
-                ownedBy: 1,
-                ownedByUsername: 'admin',
-                ownedByUser: 'John Doe',
-                tags: ''
-              }
-            ]
-          );
-
+          contacts.should.eql([require('../../fixtures/samples/contactUpdated.js')]);
           done();
         })
         .catch(done);

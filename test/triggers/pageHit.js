@@ -69,80 +69,12 @@ describe('Page triggers', () => {
 
     it('should load email open event from fake hook', (done) => {
       const bundle = {
-        cleanedRequest: require('../../fixtures/pageHit.js')
+        cleanedRequest: require('../../fixtures/requests/pageHit.js')
       };
 
       appTester(App.triggers.pageHit.operation.perform, bundle)
         .then(opens => {
-
-          opens.should.eql(
-            [
-              {
-                id: 7,
-                dateHit: '2017-06-19T14:26:54+00:00',
-                dateLeft: null,
-                redirect: null,
-                country: '',
-                region: '',
-                city: '',
-                isp: '',
-                organization: '',
-                code: 200,
-                referer: null,
-                url: 'http://mautic.dev/index_dev.php/webhook-test',
-                urlTitle: null,
-                userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
-                remoteHost: null,
-                pageLanguage: 'en',
-                source: null,
-                sourceId: null,
-                contact: {
-                  id: 54,
-                  points: 0,
-                  title: null,
-                  firstname: null,
-                  lastname: null,
-                  company: null,
-                  position: null,
-                  email: null,
-                  mobile: null,
-                  phone: null,
-                  fax: null,
-                  address1: null,
-                  address2: null,
-                  city: null,
-                  state: null,
-                  zipcode: null,
-                  country: null,
-                  preferred_locale: null,
-                  attribution_date: null,
-                  attribution: null,
-                  website: null,
-                  multiselect: null,
-                  f_select: null,
-                  boolean: null,
-                  datetime: null,
-                  timezone1: null,
-                  facebook: null,
-                  foursquare: null,
-                  googleplus: null,
-                  instagram: null,
-                  linkedin: null,
-                  skype: null,
-                  twitter: null,
-                  ownedBy: null,
-                  ownedByUsername: null,
-                  ownedByUser: null,
-                  tags: ''
-                }, page: {
-                  id: 1,
-                  title: 'Webhook test',
-                  alias: 'webhook-test'
-                }
-              }
-            ]
-          );
-
+          opens.should.eql([require('../../fixtures/samples/pageHit.js')]);
           done();
         })
         .catch(done);
@@ -154,75 +86,7 @@ describe('Page triggers', () => {
 
       appTester(App.triggers.pageHit.operation.performList, bundle)
         .then(opens => {
-
-          opens.should.eql(
-            [
-              {
-                id: 7,
-                dateHit: '2017-06-19T14:26:54+00:00',
-                dateLeft: null,
-                redirect: null,
-                country: '',
-                region: '',
-                city: '',
-                isp: '',
-                organization: '',
-                code: 200,
-                referer: null,
-                url: 'http://mautic.dev/index_dev.php/webhook-test',
-                urlTitle: null,
-                userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
-                remoteHost: null,
-                pageLanguage: 'en',
-                source: null,
-                sourceId: null,
-                contact: {
-                  id: 54,
-                  points: 0,
-                  title: null,
-                  firstname: null,
-                  lastname: null,
-                  company: null,
-                  position: null,
-                  email: null,
-                  mobile: null,
-                  phone: null,
-                  fax: null,
-                  address1: null,
-                  address2: null,
-                  city: null,
-                  state: null,
-                  zipcode: null,
-                  country: null,
-                  preferred_locale: null,
-                  attribution_date: null,
-                  attribution: null,
-                  website: null,
-                  multiselect: null,
-                  f_select: null,
-                  boolean: null,
-                  datetime: null,
-                  timezone1: null,
-                  facebook: null,
-                  foursquare: null,
-                  googleplus: null,
-                  instagram: null,
-                  linkedin: null,
-                  skype: null,
-                  twitter: null,
-                  ownedBy: null,
-                  ownedByUsername: null,
-                  ownedByUser: null,
-                  tags: ''
-                }, page: {
-                  id: 1,
-                  title: 'Webhook test',
-                  alias: 'webhook-test'
-                }
-              }
-            ]
-          );
-
+          opens.should.eql([require('../../fixtures/samples/pageHit.js')]);
           done();
         })
         .catch(done);

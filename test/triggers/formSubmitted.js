@@ -104,75 +104,13 @@ describe('form triggers', () => {
 
     it('should load submission from fake hook', (done) => {
       const bundle = {
-        cleanedRequest: require('../../fixtures/formSubmitted.js'),
-        inputData: {
-          formId: 3,
-        },
+        cleanedRequest: require('../../fixtures/requests/formSubmitted.js'),
+        inputData: {formId: 3},
       };
 
       appTester(App.triggers.formSubmitted.operation.perform, bundle)
         .then(submissions => {
-
-          submissions.should.eql(
-            [
-              {
-                id: 3,
-                ip: '127.0.0.1',
-                dateSubmitted: '2017-06-14T12:25:25+00:00',
-                referrer: 'http://mautic.dev/index_dev.php/form/3',
-                page: null,
-                results: {
-                  email: 'john.doe@atlas.cz',
-                  country: 'Czech Republic',
-                  f_select: 'option3',
-                  checkbox: 'check2, check4'
-                },
-                contact: {
-                  id: 50,
-                  points: 0,
-                  title: null,
-                  firstname: null,
-                  lastname: null,
-                  company: null,
-                  position: null,
-                  email: 'john.doe@atlas.cz',
-                  mobile: null,
-                  phone: null,
-                  fax: null,
-                  address1: null,
-                  address2: null,
-                  city: null,
-                  state: null,
-                  zipcode: null,
-                  country: 'Czech Republic',
-                  preferred_locale: null,
-                  attribution_date: null,
-                  attribution: null,
-                  website: null,
-                  multiselect: null,
-                  f_select: 'ddd',
-                  boolean: null,
-                  datetime: null,
-                  timezone1: null,
-                  facebook: null,
-                  foursquare: null,
-                  googleplus: null,
-                  instagram: null,
-                  linkedin: null,
-                  skype: null,
-                  twitter: null,
-                  ownedBy: null,
-                  ownedByUsername: null,
-                  ownedByUser: null,
-                  tags: ''
-                },
-                formId: 3,
-                formName: 'various fields test',
-                formAlias: 'various_fi'
-              }
-            ]
-          );
-
+          submissions.should.eql([require('../../fixtures/samples/formSubmitted.js')]);
           done();
         })
         .catch(done);
@@ -180,9 +118,8 @@ describe('form triggers', () => {
 
     it('should refuse submission from fake hook because of form ID mismatch', (done) => {
       const bundle = {
-        cleanedRequest: require('../../fixtures/formSubmitted.js'),
-        inputData: {
-        },
+        cleanedRequest: require('../../fixtures/requests/formSubmitted.js'),
+        inputData: {},
       };
 
       appTester(App.triggers.formSubmitted.operation.perform, bundle)

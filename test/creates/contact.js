@@ -3,6 +3,7 @@ const should = require('should');
 const zapier = require('zapier-platform-core');
 
 const App = require('../../index');
+const Contact = require('../../entities/contact');
 const appTester = zapier.createAppTester(App);
 
 describe('creates', () => {
@@ -36,6 +37,15 @@ describe('creates', () => {
         })
         .catch(done);
     }).timeout(15000);
+
+    it('should clean contact from fake request', (done) => {
+      const request = require('../../fixtures/requests/contact.js');
+      const contact = new Contact(null, null);
+      const cleanContact = contact.cleanContact(request);
+
+      cleanContact.should.eql(require('../../fixtures/samples/contact.js'));
+      done();
+    });
 
     it('should not create a new contact when no fields mapped', (done) => {
       zapier.tools.env.inject();

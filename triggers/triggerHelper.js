@@ -21,10 +21,6 @@ TriggerHelper = function(triggerType, hookDescription) {
     return contact.cleanContacts(dirtyContacts);
   };
 
-  this.getSample = (fixtureName, callback) => {
-    return callback({}, {cleanedRequest: require('../fixtures/'+fixtureName+'.js')});
-  }
-
   this.unsubscribeHook = (z, bundle) => {
     // bundle.subscribeData contains the parsed response JSON from the subscribe
     // request made initially.

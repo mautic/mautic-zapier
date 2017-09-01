@@ -70,54 +70,12 @@ describe('contact triggers', () => {
     it('should load contact from fake hook', (done) => {
       zapier.tools.env.inject();
       const bundle = {
-        cleanedRequest: require('../../fixtures/contactCreated.js')
+        cleanedRequest: require('../../fixtures/requests/contactCreated.js')
       };
 
       appTester(App.triggers.contactCreated.operation.perform, bundle)
         .then(contacts => {
-          contacts.should.eql(
-            [
-              {
-                id: 14,
-                dateAdded: '2017-06-13T09:15:47+00:00',
-                dateIdentified: '2017-06-13T09:15:47+00:00',
-                createdBy: 1,
-                createdByUser: 'John Doe',
-                points: 0,
-                title: 'Mr.',
-                firstname: 'John',
-                lastname: 'Doe',
-                company: null,
-                position: 'Q&#38;A',
-                email: 'john@doe.com',
-                mobile: '666555444',
-                phone: null,
-                fax: null,
-                address1: 'Under the hill',
-                address2: null,
-                city: 'Prague',
-                state: null,
-                zipcode: '1600',
-                country: 'Czech Republic',
-                preferred_locale: 'cs_CZ',
-                attribution_date: '',
-                attribution: null,
-                website: 'http://doe.com',
-                facebook: 'johndoe',
-                foursquare: null,
-                googleplus: null,
-                instagram: null,
-                linkedin: null,
-                skype: null,
-                twitter: 'johndoe',
-                ownedBy: 1,
-                ownedByUsername: 'admin',
-                ownedByUser: 'John Doe',
-                tags: ''
-              }
-            ]
-          );
-
+          contacts.should.eql([require('../../fixtures/samples/contactCreated.js')]);
           done();
         })
         .catch(done);

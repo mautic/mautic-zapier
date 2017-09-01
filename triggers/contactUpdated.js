@@ -15,7 +15,7 @@ module.exports = {
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: triggerHelper.getContact,
     performList: triggerHelper.getFallbackRealContact,
-    sample: triggerHelper.getSample('contactUpdated', triggerHelper.getContact),
+    sample: require('../fixtures/samples/contactUpdated.js'),
     outputFields: triggerHelper.getContactCustomFields
   }
 };

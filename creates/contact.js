@@ -21,7 +21,7 @@ module.exports = {
   operation: {
     inputFields: getFields,
     perform: createContact,
-    sample: require('../fixtures/contact.js'),
+    sample: require('../fixtures/samples/contact.js'),
     outputFields: getFields,
   }
 };

@@ -66,7 +66,7 @@ const getPageHit = (z, bundle) => {
 };
 
 const getFallbackRealPage = (z, bundle) => {
-  return cleanPageHits(require('../fixtures/pageHit.js')['mautic.page_on_hit']);
+  return cleanPageHits(require('../fixtures/requests/pageHit.js')['mautic.page_on_hit']);
 };
 
 const getEmailFields = () => {
@@ -106,7 +106,7 @@ module.exports = {
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: getPageHit,
     performList: getFallbackRealPage,
-    sample: triggerHelper.getSample('pageHit', getPageHit),
+    sample: require('../fixtures/samples/pageHit.js'),
     outputFields: getPageHitFields
   }
 };

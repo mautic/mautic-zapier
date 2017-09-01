@@ -1,7 +1,6 @@
 const TriggerHelper = require('./triggerHelper');
 const triggerHelper = new TriggerHelper('mautic.lead_post_save_new', 'Trigger Zapier about contact create events');
 
-
 module.exports = {
   key: 'contactCreated',
   noun: 'Contact',
@@ -16,7 +15,7 @@ module.exports = {
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: triggerHelper.getContact,
     performList: triggerHelper.getFallbackRealContact,
-    sample: triggerHelper.getSample('contactCreated', triggerHelper.getContact),
+    sample: require('../fixtures/samples/contactCreated.js'),
     outputFields: triggerHelper.getContactCustomFields
   }
 };

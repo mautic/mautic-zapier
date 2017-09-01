@@ -70,56 +70,12 @@ describe('contact triggers', () => {
     it('should load contact from fake hook', (done) => {
       zapier.tools.env.inject();
       const bundle = {
-        cleanedRequest: require('../../fixtures/pointsChanged.js')
+        cleanedRequest: require('../../fixtures/requests/pointsChanged.js')
       };
 
       appTester(App.triggers.pointsChanged.operation.perform, bundle)
         .then(contacts => {
-          contacts.should.eql(
-            [
-              {
-                id: 15,
-                dateAdded: '2017-06-13T11:27:07+00:00',
-                dateModified: '2017-06-13T11:27:07+00:00',
-                dateIdentified: '2017-06-13T11:27:07+00:00',
-                lastActive: '2017-06-13T11:27:07+00:00',
-                createdByUser: ' ',
-                modifiedByUser: ' ',
-                points: 5,
-                title: null,
-                firstname: null,
-                lastname: null,
-                company: null,
-                position: null,
-                email: 'john@doe.net',
-                mobile: null,
-                phone: null,
-                fax: null,
-                address1: null,
-                address2: null,
-                city: null,
-                state: null,
-                zipcode: null,
-                country: null,
-                preferred_locale: null,
-                attribution_date: null,
-                attribution: null,
-                website: null,
-                facebook: null,
-                foursquare: null,
-                googleplus: null,
-                instagram: null,
-                linkedin: null,
-                skype: null,
-                twitter: null,
-                ownedBy: null,
-                ownedByUsername: null,
-                ownedByUser: null,
-                tags: ''
-              }
-            ]
-          );
-
+          contacts.should.eql([require('../../fixtures/samples/pointsChanged.js')]);
           done();
         })
         .catch(done);

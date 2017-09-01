@@ -70,7 +70,7 @@ const getEmailOpen = (z, bundle) => {
 };
 
 const getFallbackRealEmail = (z, bundle) => {
-  return cleanEmailOpens(require('../fixtures/emailOpened.js')['mautic.email_on_open']);
+  return cleanEmailOpens(require('../fixtures/requests/emailOpened.js')['mautic.email_on_open']);
 };
 
 const getEmailFields = () => {
@@ -123,7 +123,7 @@ module.exports = {
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: getEmailOpen,
     performList: getFallbackRealEmail,
-    sample: triggerHelper.getSample('emailOpened', getEmailOpen),
+    sample: require('../fixtures/samples/emailOpened.js'),
     outputFields: getEmailOpenFields
   }
 };
