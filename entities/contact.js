@@ -95,6 +95,10 @@ Contact = function(z, bundle) {
   };
 
   this.create = (data) => {
+    if (!data || Object.keys(data).length === 0) {
+      throw new Error('No fields were mapped. Please fill in a value to some field(s).');
+    }
+
     const requestData = {
       url: this.route+'/new',
       method: 'POST',
