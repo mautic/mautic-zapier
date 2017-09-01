@@ -42,7 +42,7 @@ describe('basic auth app', () => {
         done('Should not get here');
       })
       .catch((error) => {
-        error.message.should.containEql('API authorization denied.');
+        error.message.should.containEql('Authorization denied, invalid credentials.');
         done();
       });
   });
@@ -62,7 +62,7 @@ describe('basic auth app', () => {
         done('Should not get here');
       })
       .catch((error) => {
-        error.message.should.containEql('API authorization denied.');
+        error.message.should.containEql('Authorization denied, invalid credentials.');
         done();
       });
   });
