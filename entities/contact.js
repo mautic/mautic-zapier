@@ -17,7 +17,7 @@ Contact = function(z, bundle) {
 
   this.cleanContact = (dirtyContact) => {
     var field = new Field;
-    const coreFields = field.getContactCoreFields();
+    const coreFields = field.getContactCoreFields(true);
     const contact = {};
 
     // webhook payload stores the contact info to the 'contact' property. API does not.

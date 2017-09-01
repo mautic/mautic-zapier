@@ -7,7 +7,7 @@ TriggerHelper = function(triggerType, hookDescription) {
 
   this.getContactCustomFields = (z, bundle) => {
     const field = new Field(z, bundle);
-    return field.getList('contact');
+    return field.getList('contact', [], true);
   };
 
   this.getFallbackRealContact = (z, bundle) => {
