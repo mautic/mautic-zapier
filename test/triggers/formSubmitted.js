@@ -104,7 +104,7 @@ describe('form triggers', () => {
 
     it('should load submission from fake hook', (done) => {
       const bundle = {
-        cleanedRequest: App.triggers.formSubmitted.operation.sample,
+        cleanedRequest: require('../../fixtures/formSubmitted.js'),
         inputData: {
           formId: 3,
         },
@@ -180,7 +180,7 @@ describe('form triggers', () => {
 
     it('should refuse submission from fake hook because of form ID mismatch', (done) => {
       const bundle = {
-        cleanedRequest: App.triggers.formSubmitted.operation.sample,
+        cleanedRequest: require('../../fixtures/formSubmitted.js'),
         inputData: {
         },
       };

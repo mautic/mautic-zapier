@@ -69,7 +69,7 @@ describe('Email triggers', () => {
 
     it('should load email open event from fake hook', (done) => {
       const bundle = {
-        cleanedRequest: App.triggers.emailOpened.operation.sample
+        cleanedRequest: require('../../fixtures/emailOpened.js')
       };
 
       appTester(App.triggers.emailOpened.operation.perform, bundle)

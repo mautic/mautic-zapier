@@ -1,7 +1,6 @@
 const TriggerHelper = require('./triggerHelper');
 const triggerHelper = new TriggerHelper('mautic.email_on_open', 'Trigger Zapier about email open events');
 const Contact = require('../entities/contact');
-const sample = require('../fixtures/emailOpened.js');
 
 const cleanEmailOpens = (dirtyOpens) => {
   const opens = [];
@@ -71,7 +70,7 @@ const getEmailOpen = (z, bundle) => {
 };
 
 const getFallbackRealEmail = (z, bundle) => {
-  return cleanEmailOpens(sample['mautic.email_on_open']);
+  return cleanEmailOpens(require('../fixtures/emailOpened.js')['mautic.email_on_open']);
 };
 
 const getEmailFields = () => {
@@ -124,7 +123,7 @@ module.exports = {
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: getEmailOpen,
     performList: getFallbackRealEmail,
-    sample: sample,
+    sample: triggerHelper.getSample('emailOpened', getEmailOpen),
     outputFields: getEmailOpenFields
   }
 };

@@ -92,7 +92,7 @@ describe('contact triggers', () => {
     it('should load contact from fake hook', (done) => {
       zapier.tools.env.inject();
       const bundle = {
-        cleanedRequest: App.triggers.contactUpdated.operation.sample
+        cleanedRequest: require('../../fixtures/contactUpdated.js')
       };
 
       appTester(App.triggers.contactUpdated.operation.perform, bundle)

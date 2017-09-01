@@ -35,6 +35,6 @@ describe('creates', () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(10000);
   });
 });

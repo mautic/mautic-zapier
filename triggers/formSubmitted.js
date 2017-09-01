@@ -135,6 +135,6 @@ module.exports = {
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: getSubmission,
     performList: performList,
-    sample: require('../fixtures/formSubmitted.js'),
+    sample: triggerHelper.getSample('formSubmitted', getSubmission),
   }
 };

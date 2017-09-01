@@ -69,7 +69,7 @@ describe('Page triggers', () => {
 
     it('should load email open event from fake hook', (done) => {
       const bundle = {
-        cleanedRequest: App.triggers.pageHit.operation.sample
+        cleanedRequest: require('../../fixtures/pageHit.js')
       };
 
       appTester(App.triggers.pageHit.operation.perform, bundle)

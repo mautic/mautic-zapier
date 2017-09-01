@@ -1,7 +1,6 @@
 const TriggerHelper = require('./triggerHelper');
 const triggerHelper = new TriggerHelper('mautic.page_on_hit', 'Trigger Zapier about page hit events');
 const Contact = require('../entities/contact');
-const sample = require('../fixtures/pageHit.js');
 
 const cleanPageHits = (dirtyHits) => {
   const hits = [];
@@ -67,7 +66,7 @@ const getPageHit = (z, bundle) => {
 };
 
 const getFallbackRealPage = (z, bundle) => {
-  return cleanPageHits(sample['mautic.page_on_hit']);
+  return cleanPageHits(require('../fixtures/pageHit.js')['mautic.page_on_hit']);
 };
 
 const getEmailFields = () => {
@@ -107,7 +106,7 @@ module.exports = {
     performUnsubscribe: triggerHelper.unsubscribeHook,
     perform: getPageHit,
     performList: getFallbackRealPage,
-    sample: sample,
+    sample: triggerHelper.getSample('pageHit', getPageHit),
     outputFields: getPageHitFields
   }
 };
