@@ -32,7 +32,7 @@ describe('creates', () => {
           result.lastname.should.equal('Doe');
           result.email.should.equal('john@doe.email');
           result.points.should.equal(7);
-          result.tags.should.equal('zapier,api');
+          result.tags.should.equal('api,zapier');
           done();
         })
         .catch(done);
