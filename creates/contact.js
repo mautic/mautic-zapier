@@ -15,8 +15,8 @@ module.exports = {
   key: 'contact',
   noun: 'Contact',
   display: {
-    label: 'Create Contact',
-    description: 'Creates a new contact.'
+    label: 'Create or Update Contact',
+    description: 'Creates a new contact or updates and existing contact.'
   },
   operation: {
     inputFields: getFields,
