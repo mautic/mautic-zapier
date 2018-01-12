@@ -13,10 +13,6 @@ const test = (z, bundle) => {
         throw new Error('The URL you provided ('+bundle.authData.baseUrl+') is not the base URL of a Mautic instance');
       }
 
-      if (response.json && response.json.errors) {
-        throw new Error(response.json.errors[0].message);
-      }
-
       return response;
     });
 };

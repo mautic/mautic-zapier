@@ -12,6 +12,7 @@ const App = {
   platformVersion: require('zapier-platform-core').version,
   authentication: require('./authentication'),
   beforeRequest: require('./middlewares/beforeRequest'),
+  afterResponse: require('./middlewares/afterResponse'),
   triggers: {
     [ContactUpdatedTrigger.key]: ContactUpdatedTrigger,
     [ContactCreatedTrigger.key]: ContactCreatedTrigger,
