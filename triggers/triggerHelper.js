@@ -45,6 +45,7 @@ TriggerHelper = function(triggerType, hookDescription) {
       webhookUrl: bundle.targetUrl,
       name: this.hookDescription,
       description: 'Created via Zapier',
+      eventsOrderbyDir: 'DESC',
       triggers: [this.type]
     };
 

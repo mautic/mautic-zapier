@@ -30,6 +30,7 @@ describe('contact triggers', () => {
           response.hook.name.should.eql('Trigger Zapier about contact create events');
           response.hook.description.should.eql('Created via Zapier');
           response.hook.triggers.should.eql(['mautic.lead_post_save_new']);
+          response.hook.eventsOrderbyDir.should.eql('DESC');
 
           // Set subscribeDate for the unsubscribe test
           subscribeData = response;
@@ -60,6 +61,7 @@ describe('contact triggers', () => {
           response.hook.name.should.eql('Trigger Zapier about contact create events');
           response.hook.description.should.eql('Created via Zapier');
           response.hook.triggers.should.eql(['mautic.lead_post_save_new']);
+          response.hook.eventsOrderbyDir.should.eql('DESC');
 
           done();
         })

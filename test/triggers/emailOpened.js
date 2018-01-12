@@ -30,6 +30,7 @@ describe('Email triggers', () => {
           response.hook.name.should.eql('Trigger Zapier about email open events');
           response.hook.description.should.eql('Created via Zapier');
           response.hook.triggers.should.eql(['mautic.email_on_open']);
+          response.hook.eventsOrderbyDir.should.eql('DESC');
 
           // Set subscribeDate for the unsubscribe test
           subscribeData = response;
@@ -60,6 +61,7 @@ describe('Email triggers', () => {
           response.hook.name.should.eql('Trigger Zapier about email open events');
           response.hook.description.should.eql('Created via Zapier');
           response.hook.triggers.should.eql(['mautic.email_on_open']);
+          response.hook.eventsOrderbyDir.should.eql('DESC');
 
           done();
         })

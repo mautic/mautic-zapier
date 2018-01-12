@@ -30,6 +30,7 @@ describe('form triggers', () => {
           response.hook.name.should.eql('Trigger Zapier about form submit events');
           response.hook.description.should.eql('Created via Zapier');
           response.hook.triggers.should.eql(['mautic.form_on_submit']);
+          response.hook.eventsOrderbyDir.should.eql('DESC');
 
           // Set subscribeDate for the unsubscribe test
           subscribeData = response;
@@ -60,6 +61,7 @@ describe('form triggers', () => {
           response.hook.name.should.eql('Trigger Zapier about form submit events');
           response.hook.description.should.eql('Created via Zapier');
           response.hook.triggers.should.eql(['mautic.form_on_submit']);
+          response.hook.eventsOrderbyDir.should.eql('DESC');
 
           done();
         })
