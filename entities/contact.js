@@ -74,9 +74,25 @@ Contact = function(z, bundle) {
   };
 
   this.modifyDataBeforeCreate = (data) => {
-    // convert comma separated list of tags into array
-    if (typeof data.tags === 'string') {
+
+    // convert comma separated list of tags into array (BC)
+    if (data.tags && typeof data.tags === 'string') {
       data.tags = data.tags.split(',');
+    } else {
+      data.tags = [];
+    }
+
+    // merge addTags array into tags array
+    if (data.addTags && Array.isArray(data.addTags)) {
+      data.tags = data.tags.concat(data.addTags);
+      delete data.addTags;
+    }
+
+    // merge removeTags into tags array and add "-" prefix
+    if (data.removeTags && Array.isArray(data.removeTags)) {
+      data.removeTags = data.removeTags.map(x => '-'+x);
+      data.tags = data.tags.concat(data.removeTags);
+      delete data.removeTags;
     }
 
     return data;

@@ -319,7 +319,16 @@ module.exports = {
         "ipAddresses": [],
         "tags": [
             {
-                "tag": "ignored"
+                "id": 1,
+                "tag": "APItag1"
+            },
+            {
+                "id": 5,
+                "tag": "bac"
+            },
+            {
+                "id": 3,
+                "tag": "zapier"
             }
         ],
         "utmtags": [],

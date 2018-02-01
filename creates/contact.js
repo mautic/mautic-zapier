@@ -3,8 +3,17 @@ const Contact = require('../entities/contact');
 
 const getFields = (z, bundle) => {
   const field = new Field(z, bundle);
-  return field.getList('contact');
+  const fields = field.getList('contact');
+  return fields;
 };
+
+const addTagActionFields = (fields, z) => {
+  const tags = getTags(z)
+  const tagActionFields = [
+    {key: 'addTags', label: 'Add Tags', choices: [], list: true},
+    {key: 'removeTags', label: 'Remove Tags', choices: [], list: true, helpText: 'This is used only when updating an existing user'},
+  ]
+}
 
 const createContact = (z, bundle) => {
   var contact = new Contact(z, bundle);

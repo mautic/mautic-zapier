@@ -34,5 +34,5 @@ module.exports = {
   ownedBy: 1,
   ownedByUsername: 'admin',
   ownedByUser: 'John Doe',
-  tags: 'ignored'
+  tags: 'APItag1,bac,zapier'
 };
