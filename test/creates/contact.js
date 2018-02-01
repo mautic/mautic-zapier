@@ -74,8 +74,11 @@ describe('creates', () => {
       };
 
       appTester(App.creates.contact.operation.inputFields, bundle)
-        .then((result) => {
-          result.forEach((field) => field.key.should.not.equal('modifiedByUser'));
+        .then((fields) => {
+          fields.should.not.containEql({key: 'tags', label: 'Tags', helpText: 'Comma separated tags. Use - before the tag if you want to remove it'});
+          fields.should.containEql({key: 'addTags', type: 'string', label: 'Add Tags', dynamic: 'tags.id.tag', list: true, helpText: 'Select the tags you want to add to the contact'});
+          fields.should.containEql({key: 'removeTags', type: 'string', label: 'Remove Tags', dynamic: 'tags.id.tag', list: true, helpText: 'Select the tags you want to remove from the contact. Wroks only for updates of existing contacts.'});
+          fields.should.containEql({key: 'email', label: 'Email'});
           done();
         })
         .catch(done);

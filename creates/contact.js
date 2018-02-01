@@ -1,19 +1,27 @@
 const Field = require('../entities/field');
 const Contact = require('../entities/contact');
 
-const getFields = (z, bundle) => {
-  const field = new Field(z, bundle);
-  const fields = field.getList('contact');
+const modifyTagFields = (fields) => {
+  // Add tag list fields
+  fields = fields.concat([
+    {key: 'addTags', type: 'string', label: 'Add Tags', dynamic: 'tags.id.tag', list: true, helpText: 'Select the tags you want to add to the contact'},
+    {key: 'removeTags', type: 'string', label: 'Remove Tags', dynamic: 'tags.id.tag', list: true, helpText: 'Select the tags you want to remove from the contact. Wroks only for updates of existing contacts.'},
+  ]);
+
+  // remove string tag field
+  for (var key in fields) {
+    if (fields[key].key === 'tags') {
+      delete fields[key];
+    }
+  }
+
   return fields;
 };
 
-const addTagActionFields = (fields, z) => {
-  const tags = getTags(z)
-  const tagActionFields = [
-    {key: 'addTags', label: 'Add Tags', choices: [], list: true},
-    {key: 'removeTags', label: 'Remove Tags', choices: [], list: true, helpText: 'This is used only when updating an existing user'},
-  ]
-}
+const getFields = (z, bundle) => {
+  const field = new Field(z, bundle);
+  return field.getList('contact').then(fields => modifyTagFields(fields));
+};
 
 const createContact = (z, bundle) => {
   var contact = new Contact(z, bundle);

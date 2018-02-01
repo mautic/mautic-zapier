@@ -59,7 +59,7 @@ Contact = function(z, bundle) {
 
     // Flatten the tags
     contact.tags = '';
-    if (typeof dirtyContact.tags === 'object' && dirtyContact.tags.length) {
+    if (dirtyContact.tags && typeof dirtyContact.tags === 'object' && dirtyContact.tags.length) {
       for (var key in dirtyContact.tags) {
         if (typeof dirtyContact.tags[key].tag !== 'undefined' && dirtyContact.tags[key].tag) {
           if (contact.tags.length > 0) {

@@ -94,8 +94,10 @@ describe('contact triggers', () => {
       };
 
       appTester(App.triggers.contactCreated.operation.outputFields, bundle)
-        .then((result) => {
-          result.should.containEql({key: 'modifiedByUser', label: 'Modified By User'});
+        .then((fields) => {
+          fields.should.containEql({key: 'modifiedByUser', label: 'Modified By User'});
+          fields.should.containEql({key: 'tags', label: 'Tags', helpText: 'Comma separated tags. Use - before the tag if you want to remove it'});
+          fields.should.containEql({key: 'email', label: 'Email'});
           done();
         })
         .catch(done);
