@@ -16,4 +16,21 @@ describe('Contact entity:', () => {
     contactToSave.tags.should.be.eql(['tagD', '-tagE', 'tagA', 'tagB', '-tagC']);
   });
 
+  it('tests removeEmptyValues', () => {
+    const contact = new Contact();
+    const sampleContactToSave = {
+      firstname: 'John',
+      lastname: '',
+      email: 'john@doe.email',
+      points: 0,
+      tags: ' ',
+      city: null,
+    };
+    const contactToSave = contact.removeEmptyValues(sampleContactToSave);
+    contactToSave.should.be.eql({
+      firstname: 'John',
+      email: 'john@doe.email',
+    });
+  });
+
 });

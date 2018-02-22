@@ -95,8 +95,27 @@ Contact = function(z, bundle) {
       delete data.removeTags;
     }
 
+    // Remove empty values so they won't delete some actual data
+    data = this.removeEmptyValues(data)
+
     return data;
   };
+
+  this.removeEmptyValues = data => {
+    for (let key in data) {
+      let value = data[key]
+
+      if (typeof value === 'string') {
+        value = value.trim()
+      }
+
+      if (!value) {
+        delete data[key]
+      }
+    }
+
+    return data
+  }
 
   this.getList = (params) => {
     const options = {
