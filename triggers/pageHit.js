@@ -107,6 +107,6 @@ module.exports = {
     perform: getPageHit,
     performList: getFallbackRealPage,
     sample: require('../fixtures/samples/pageHit.js'),
-    outputFields: getPageHitFields
+    outputFields: [getPageHitFields],
   }
 };

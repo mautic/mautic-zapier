@@ -36,9 +36,9 @@ module.exports = {
     description: 'Creates a new contact or updates and existing contact.'
   },
   operation: {
-    inputFields: getFields,
+    inputFields: [getFields],
     perform: createContact,
     sample: require('../fixtures/samples/contact.js'),
-    outputFields: getFields,
+    outputFields: [getFields],
   }
 };

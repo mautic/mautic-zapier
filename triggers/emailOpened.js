@@ -124,6 +124,6 @@ module.exports = {
     perform: getEmailOpen,
     performList: getFallbackRealEmail,
     sample: require('../fixtures/samples/emailOpened.js'),
-    outputFields: getEmailOpenFields
+    outputFields: [getEmailOpenFields],
   }
 };

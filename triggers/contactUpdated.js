@@ -16,6 +16,6 @@ module.exports = {
     perform: triggerHelper.getContact,
     performList: triggerHelper.getFallbackRealContact,
     sample: require('../fixtures/samples/contactUpdated.js'),
-    outputFields: triggerHelper.getContactCustomFields
+    outputFields: [triggerHelper.getContactCustomFields],
   }
 };
