@@ -22,6 +22,7 @@ module.exports = {
   fields: [
     {key: 'baseUrl', type: 'string', required: true, helpText: 'The root URL of your Mautic installation starting with https://. E.g. https://my.mautic.net.'}
   ],
+  connectionLabel: '{{bundle.authData.username}}',
 
   // The test method allows Zapier to verify that the credentials a user provides are valid. We'll execute this
   // method whenver a user connects their account for the first time.
