@@ -101,21 +101,19 @@ Contact = function(z, bundle) {
     return data;
   };
 
-  this.removeEmptyValues = data => {
-    for (let key in data) {
+  this.removeEmptyValues = data => Object.keys(data).reduce((result, key) => {
       let value = data[key]
 
       if (typeof value === 'string') {
         value = value.trim()
       }
 
-      if (!value) {
-        delete data[key]
+      if (value) {
+        result[key] = value
       }
-    }
 
-    return data
-  }
+      return result
+    }, {})
 
   this.getList = (params) => {
     const options = {
