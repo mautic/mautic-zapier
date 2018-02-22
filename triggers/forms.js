@@ -15,5 +15,6 @@ module.exports = {
   },
   operation: {
     perform: getForms,
+    sample: require('../fixtures/requests/forms.js'),
   }
 };
