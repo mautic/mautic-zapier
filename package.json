@@ -1,6 +1,6 @@
 {
   "name": "mautic-zapier",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "An app to integrate a Mautic instance with Zapier",
   "repository": "mautic/mautic-zapier",
   "homepage": "https://github.com/mautic/mautic-zapier",
