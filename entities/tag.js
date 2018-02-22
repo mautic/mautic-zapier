@@ -15,11 +15,16 @@ Tag = function(z, bundle) {
    */
   this.cleanTags = (dirtyTags) => {
     const cleanTags = []
-
+    const usedTags = []
+    
     if (dirtyTags) {
       for (var key in dirtyTags) {
         var tag = dirtyTags[key].tag;
-        cleanTags.push({id: tag, name: tag});
+        // Mautic sometimes duplicates tags and it will break Zapier if there are 2 identical IDs
+        if (usedTags.indexOf(tag) === -1) {
+          cleanTags.push({id: tag, name: tag});
+          usedTags.push(tag);
+        }
       }
     }
 
