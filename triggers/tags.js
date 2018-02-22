@@ -15,5 +15,6 @@ module.exports = {
   },
   operation: {
     perform: getTags,
+    sample: require('../fixtures/requests/tags.js'),
   }
 };
