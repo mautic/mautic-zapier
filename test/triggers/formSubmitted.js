@@ -39,7 +39,7 @@ describe('form triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should delete the form submitted hook', (done) => {
       zapier.tools.env.inject();
@@ -67,7 +67,7 @@ describe('form triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should load a submission via API', (done) => {
       const bundle = {

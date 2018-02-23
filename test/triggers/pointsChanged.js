@@ -39,7 +39,7 @@ describe('contact triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should delete a contact points changed hook', (done) => {
       zapier.tools.env.inject();
@@ -67,7 +67,7 @@ describe('contact triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should load contact from fake hook', (done) => {
       zapier.tools.env.inject();

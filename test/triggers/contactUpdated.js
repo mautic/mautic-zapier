@@ -39,7 +39,7 @@ describe('contact triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should delete a contact update hook', (done) => {
       zapier.tools.env.inject();
@@ -67,7 +67,7 @@ describe('contact triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should get a list of contact custom fields', (done) => {
       zapier.tools.env.inject();
@@ -89,7 +89,7 @@ describe('contact triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should load contact from fake hook', (done) => {
       zapier.tools.env.inject();
@@ -129,7 +129,7 @@ describe('contact triggers', () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(15000);
   });
 
 });

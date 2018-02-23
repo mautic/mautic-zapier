@@ -39,7 +39,7 @@ describe('Page triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should delete the page hit hook', (done) => {
       zapier.tools.env.inject();
@@ -67,7 +67,7 @@ describe('Page triggers', () => {
         })
         .catch(done);
 
-    });
+    }).timeout(15000);
 
     it('should load email open event from fake hook', (done) => {
       const bundle = {

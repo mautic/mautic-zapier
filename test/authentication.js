@@ -25,7 +25,7 @@ describe('basic auth app', () => {
         done();
       })
       .catch(done);
-  });
+  }).timeout(15000);
 
   it('fails auth on bad password', (done) => {
     zapier.tools.env.inject();
@@ -45,7 +45,7 @@ describe('basic auth app', () => {
         error.message.should.containEql('Authorization denied, invalid credentials.');
         done();
       });
-  });
+  }).timeout(15000);
 
   it('fails auth on bad username', (done) => {
     zapier.tools.env.inject();
@@ -65,7 +65,7 @@ describe('basic auth app', () => {
         error.message.should.containEql('Authorization denied, invalid credentials.');
         done();
       });
-  });
+  }).timeout(15000);
 
   it('fails auth on invalid url', (done) => {
     zapier.tools.env.inject();
@@ -85,7 +85,7 @@ describe('basic auth app', () => {
         error.message.should.containEql('only absolute urls are supported\nWhat happened:\n  Starting GET request to invalidurl/api/contacts\n  only absolute urls are supported');
         done();
       });
-  });
+  }).timeout(15000);
 
   it('fails auth on not existent url', (done) => {
     zapier.tools.env.inject();
@@ -106,7 +106,7 @@ describe('basic auth app', () => {
         error.message.should.startWith('request to '+url+'/api/contacts?limit=1&minimal=1 failed');
         done();
       });
-  });
+  }).timeout(15000);
 
   it('fails auth on mautic url with /s', (done) => {
     zapier.tools.env.inject();
@@ -127,5 +127,5 @@ describe('basic auth app', () => {
         error.message.should.startWith('The URL you provided ('+url+') is not the base URL of a Mautic instance');
         done();
       });
-  });
+  }).timeout(25000);
 });
