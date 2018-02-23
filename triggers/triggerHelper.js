@@ -54,12 +54,14 @@ TriggerHelper = function(triggerType, hookDescription) {
     const options = {
       url: bundle.authData.baseUrl+'/api/hooks/new',
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      headers: {
+        'content-type': 'application/json'
+      }
     };
 
     // You may return a promise or a normal data structure from any perform method.
-    return z.request(options)
-      .then((response) => JSON.parse(response.content));
+    return z.request(options).then(response => response.json);
   };
 };
 
