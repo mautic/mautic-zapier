@@ -21,8 +21,8 @@ describe('tag triggers', () => {
         if (tags) {
           for (var i in tags) {
             var tag = tags[i];
-            tag.id.length.should.be.greaterThan(0);
-            tag.name.length.should.be.greaterThan(0);
+            tag.should.have.property('id')
+            tag.should.have.property('name')
             tag.id.should.be.equal(tag.name);
           }
         } else {
