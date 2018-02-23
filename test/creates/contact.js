@@ -107,7 +107,7 @@ describe('creates', () => {
           fields.should.not.containEql({key: 'tags', label: 'Tags', helpText: 'Comma separated tags. Use - before the tag if you want to remove it'});
           fields.should.containEql({key: 'addTags', type: 'string', label: 'Add Tags', dynamic: 'tags.id.tag', list: true, helpText: 'Select the tags you want to add to the contact'});
           fields.should.containEql({key: 'removeTags', type: 'string', label: 'Remove Tags', dynamic: 'tags.id.tag', list: true, helpText: 'Select the tags you want to remove from the contact. Wroks only for updates of existing contacts.'});
-          fields.should.containEql({key: 'email', label: 'Email'});
+          fields.should.containEql({key: 'email', label: 'Email', helpText: 'If a contact exists with this email address, then it will be updated. Email address is an identifier field by default.'});
           done();
         })
         .catch(done);

@@ -10,6 +10,10 @@ const modifyTagFields = (fields) => {
 
   // remove string tag field
   for (var key in fields) {
+    if (fields[key].key === 'email') {
+      fields[key].helpText = 'If a contact exists with this email address, then it will be updated. Email address is an identifier field by default.'
+    }
+
     if (fields[key].key === 'tags') {
       delete fields[key];
     }
