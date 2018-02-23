@@ -38,7 +38,7 @@ describe('creates', () => {
         .catch(done);
     }).timeout(15000);
 
-    it('should update the previously contact', (done) => {
+    it('should update the previously created contact', (done) => {
       zapier.tools.env.inject();
       const bundle = {
         inputData: {
@@ -56,6 +56,7 @@ describe('creates', () => {
 
       appTester(App.creates.contact.operation.perform, bundle)
         .then((result) => {
+          // The contact created by previous test should still have the data
           result.firstname.should.equal('John');
           result.lastname.should.equal('Doe');
           result.email.should.equal('john@doe.email');

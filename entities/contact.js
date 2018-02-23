@@ -73,7 +73,7 @@ Contact = function(z, bundle) {
     return contact;
   };
 
-  this.modifyDataBeforeCreate = (data) => {
+  this.modifyDataBeforeCreate = data => {
 
     // convert comma separated list of tags into array (BC)
     if (data.tags && typeof data.tags === 'string') {
@@ -96,9 +96,7 @@ Contact = function(z, bundle) {
     }
 
     // Remove empty values so they won't delete some actual data
-    data = this.removeEmptyValues(data)
-
-    return data;
+    return this.removeEmptyValues(data);
   };
 
   this.removeEmptyValues = data => Object.keys(data).reduce((result, key) => {
@@ -106,6 +104,10 @@ Contact = function(z, bundle) {
 
       if (typeof value === 'string') {
         value = value.trim()
+      }
+
+      if (Array.isArray(value) && value.length === 0) {
+        value = null
       }
 
       if (value) {

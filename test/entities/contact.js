@@ -25,6 +25,7 @@ describe('Contact entity:', () => {
       points: 0,
       tags: ' ',
       city: null,
+      tags: [],
     };
     const contactToSave = contact.removeEmptyValues(sampleContactToSave);
     contactToSave.should.be.eql({
