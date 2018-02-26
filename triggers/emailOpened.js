@@ -2,11 +2,13 @@ const TriggerHelper = require('./triggerHelper');
 const triggerHelper = new TriggerHelper('mautic.email_on_open', 'Trigger Zapier about email open events');
 const Contact = require('../entities/contact');
 
-const cleanEmailOpens = (dirtyOpens) => {
+const cleanEmailOpens = (dirtyOpens, emailId) => {
   const opens = [];
 
   for (var key in dirtyOpens) {
-    opens.push(cleanEmailOpen(dirtyOpens[key]));
+    if (emailId === null || parseInt(dirtyOpens[key].stat.email.id) === parseInt(emailId)) {
+      opens.push(cleanEmailOpen(dirtyOpens[key]))
+    }
   };
 
   return opens;
@@ -66,11 +68,23 @@ const cleanEmailOpen = (dirtyOpen) => {
 
 const getEmailOpen = (z, bundle) => {
   const dirtyOpens = bundle.cleanedRequest['mautic.email_on_open'];
-  return cleanEmailOpens(dirtyOpens);
+  let emailId = null;
+
+  if (bundle.inputData && bundle.inputData.emailId) {
+    emailId = bundle.inputData.emailId;
+  }
+
+  return cleanEmailOpens(dirtyOpens, emailId);
 };
 
 const getFallbackRealEmail = (z, bundle) => {
-  return cleanEmailOpens(require('../fixtures/requests/emailOpened.js')['mautic.email_on_open']);
+  const emailId = null;
+
+  if (bundle.inputData && bundle.inputData.emailId) {
+    emailId = bundle.inputData.emailId;
+  }
+
+  return cleanEmailOpens(require('../fixtures/requests/emailOpened.js')['mautic.email_on_open'], emailId);
 };
 
 const getEmailFields = () => {
@@ -114,8 +128,8 @@ module.exports = {
   key: 'emailOpened',
   noun: 'Email',
   display: {
-    label: 'Email Opened',
-    description: 'Triggers when a contact email open.'
+    label: 'Email Viewed',
+    description: 'Triggers when a contact views a specific email.'
   },
   operation: {
     type: 'hook',
@@ -125,5 +139,8 @@ module.exports = {
     performList: getFallbackRealEmail,
     sample: require('../fixtures/samples/emailOpened.js'),
     outputFields: [getEmailOpenFields],
+    inputFields: [
+      {key: 'emailId', type: 'integer', label: 'Email', dynamic: 'emails.id.name', required: false},
+    ],
   }
 };

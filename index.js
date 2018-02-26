@@ -2,6 +2,7 @@ const ContactUpdatedTrigger = require('./triggers/contactUpdated');
 const ContactCreatedTrigger = require('./triggers/contactCreated');
 const PointsChangedTrigger = require('./triggers/pointsChanged');
 const FormSubmittedTrigger = require('./triggers/formSubmitted');
+const EmailsTrigger = require('./triggers/emails');
 const FormsTrigger = require('./triggers/forms');
 const TagsTrigger = require('./triggers/tags');
 const EmailOpenedTrigger = require('./triggers/emailOpened');
@@ -19,6 +20,7 @@ const App = {
     [ContactCreatedTrigger.key]: ContactCreatedTrigger,
     [PointsChangedTrigger.key]: PointsChangedTrigger,
     [FormSubmittedTrigger.key]: FormSubmittedTrigger,
+    [EmailsTrigger.key]: EmailsTrigger,
     [FormsTrigger.key]: FormsTrigger,
     [TagsTrigger.key]: TagsTrigger,
     [EmailOpenedTrigger.key]: EmailOpenedTrigger,

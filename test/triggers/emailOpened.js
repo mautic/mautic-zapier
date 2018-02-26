@@ -82,6 +82,37 @@ describe('Email triggers', () => {
         .catch(done);
     });
 
+    it('should load email open event from fake hook and filter by email ID which exists', (done) => {
+      const bundle = {
+        cleanedRequest: require('../../fixtures/requests/emailOpened.js'),
+        inputData: {
+          emailId: 9,
+        },
+      };
+
+      appTester(App.triggers.emailOpened.operation.perform, bundle)
+        .then(opens => {
+          opens.should.eql([require('../../fixtures/samples/emailOpened.js')]);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should load email open event from fake hook and filter by email ID which does not exist', (done) => {
+      const bundle = {
+        cleanedRequest: require('../../fixtures/requests/emailOpened.js'),
+        inputData: {
+          emailId: 10,
+        },
+      };
+
+      appTester(App.triggers.emailOpened.operation.perform, bundle)
+        .then(opens => {
+          opens.should.eql([]);
+          done();
+        })
+        .catch(done);
+    });
 
     it('should load email open event from list', (done) => {
       const bundle = {};
