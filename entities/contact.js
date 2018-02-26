@@ -75,25 +75,32 @@ Contact = function(z, bundle) {
 
   this.modifyDataBeforeCreate = data => {
 
+    const bcTagsExist = data.tags && typeof data.tags === 'string';
+    const addTagsExist = data.addTags && Array.isArray(data.addTags) && data.addTags.length > 0;
+    const removeTagsExist = data.removeTags && Array.isArray(data.removeTags) && data.removeTags.length > 0;
+
     // convert comma separated list of tags into array (BC)
-    if (data.tags && typeof data.tags === 'string') {
+    if (!(addTagsExist || removeTagsExist) && bcTagsExist) {
       data.tags = data.tags.split(',');
     } else {
       data.tags = [];
     }
 
     // merge addTags array into tags array
-    if (data.addTags && Array.isArray(data.addTags)) {
+    if (addTagsExist) {
       data.tags = data.tags.concat(data.addTags);
       delete data.addTags;
     }
 
     // merge removeTags into tags array and add "-" prefix
-    if (data.removeTags && Array.isArray(data.removeTags)) {
+    if (removeTagsExist) {
       data.removeTags = data.removeTags.map(x => '-'+x);
       data.tags = data.tags.concat(data.removeTags);
       delete data.removeTags;
     }
+
+    // Trim spaces from tags
+    data.tags = data.tags.map(tag => tag.trim())
 
     // Remove empty values so they won't delete some actual data
     return this.removeEmptyValues(data);
