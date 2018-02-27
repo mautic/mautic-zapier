@@ -1,8 +1,8 @@
 const Email = require('../entities/email');
 
 const getEmails = (z, bundle) => {
-  var form = new Email(z, bundle);
-  return form.getList().then(dirtyEmails => form.convertResponseToArray(dirtyEmails));
+  var email = new Email(z, bundle);
+  return email.getList().then(dirtyEmails => email.convertResponseToArray(dirtyEmails));
 };
 
 module.exports = {

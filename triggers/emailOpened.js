@@ -78,7 +78,7 @@ const getEmailOpen = (z, bundle) => {
 };
 
 const getFallbackRealEmail = (z, bundle) => {
-  const emailId = null;
+  let emailId = null;
 
   if (bundle.inputData && bundle.inputData.emailId) {
     emailId = bundle.inputData.emailId;

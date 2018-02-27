@@ -22,10 +22,10 @@ describe('email triggers', () => {
         .then(emails => {
           if (emails) {
             for (var i in emails) {
-              var form = emails[i];
-              form.should.have.property('name');
-              form.should.have.property('id');
-              form.id.should.be.greaterThan(0);
+              var email = emails[i];
+              email.should.have.property('name');
+              email.should.have.property('id');
+              email.id.should.be.greaterThan(0);
             }
           } else {
             console.warning('Your Mautic instance does not contain any emails to test with')

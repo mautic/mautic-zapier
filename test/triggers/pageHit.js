@@ -69,7 +69,7 @@ describe('Page triggers', () => {
 
     }).timeout(15000);
 
-    it('should load email open event from fake hook', (done) => {
+    it('should load page hit event from fake hook', (done) => {
       const bundle = {
         cleanedRequest: require('../../fixtures/requests/pageHit.js')
       };
@@ -82,8 +82,39 @@ describe('Page triggers', () => {
         .catch(done);
     });
 
+    it('should load page hit event from fake hook and filter by page ID which exists', (done) => {
+      const bundle = {
+        cleanedRequest: require('../../fixtures/requests/pageHit.js'),
+        inputData: {
+          pageId: 1,
+        },
+      };
 
-    it('should load email open event from list', (done) => {
+      appTester(App.triggers.pageHit.operation.perform, bundle)
+        .then(opens => {
+          opens.should.eql([require('../../fixtures/samples/pageHit.js')]);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should load page hit event from fake hook and filter by page ID which does not exist', (done) => {
+      const bundle = {
+        cleanedRequest: require('../../fixtures/requests/pageHit.js'),
+        inputData: {
+          pageId: 10,
+        },
+      };
+
+      appTester(App.triggers.pageHit.operation.perform, bundle)
+        .then(opens => {
+          opens.should.eql([]);
+          done();
+        })
+        .catch(done);
+    });
+
+    it('should load page hit event from list', (done) => {
       const bundle = {};
 
       appTester(App.triggers.pageHit.operation.performList, bundle)

@@ -2,11 +2,12 @@ const TriggerHelper = require('./triggerHelper');
 const triggerHelper = new TriggerHelper('mautic.page_on_hit', 'Trigger Zapier about page hit events');
 const Contact = require('../entities/contact');
 
-const cleanPageHits = (dirtyHits) => {
+const cleanPageHits = (dirtyHits, pageId) => {
   const hits = [];
-
   for (var key in dirtyHits) {
-    hits.push(cleanPageHit(dirtyHits[key]));
+    if (pageId === null || dirtyHits[key].hit.page && dirtyHits[key].hit.page.id && parseInt(dirtyHits[key].hit.page.id) === parseInt(pageId)) {
+      hits.push(cleanPageHit(dirtyHits[key]));
+    }
   };
 
   return hits;
@@ -61,12 +62,24 @@ const cleanPageHit = (dirtyHit) => {
 };
 
 const getPageHit = (z, bundle) => {
+  let pageId = null;
+
+  if (bundle.inputData && bundle.inputData.pageId) {
+    pageId = bundle.inputData.pageId;
+  }
+
   const dirtyHits = bundle.cleanedRequest['mautic.page_on_hit'];
-  return cleanPageHits(dirtyHits);
+  return cleanPageHits(dirtyHits, pageId);
 };
 
 const getFallbackRealPage = (z, bundle) => {
-  return cleanPageHits(require('../fixtures/requests/pageHit.js')['mautic.page_on_hit']);
+  let pageId = null;
+
+  if (bundle.inputData && bundle.inputData.pageId) {
+    pageId = bundle.inputData.pageId;
+  }
+
+  return cleanPageHits(require('../fixtures/requests/pageHit.js')['mautic.page_on_hit'], pageId);
 };
 
 const getEmailFields = () => {
@@ -108,5 +121,8 @@ module.exports = {
     performList: getFallbackRealPage,
     sample: require('../fixtures/samples/pageHit.js'),
     outputFields: [getPageHitFields],
+    inputFields: [
+      {key: 'pageId', type: 'integer', label: 'Landing Page', dynamic: 'pages.id.name', required: false},
+    ],
   }
 };
