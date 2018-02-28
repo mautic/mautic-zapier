@@ -37,15 +37,15 @@ The configured Zapier integrations are called Zaps. The main types of Zaps are T
 - Actions send data from some other integration in Mautic.
 
 ### Supported Triggers
-- [x] **Contact Created** - _contains contact info and field values_
-- [x] **Contact Updated** - _contains contact info and field values_
+- [x] **New Contact** - _contains contact info and field values_
+- [x] **Updated Contact** - _contains contact info and field values_
 - [x] **Contact Points Changed** - _contains contact info, point value and field values_
-- [x] **Email Opened** - _contains contact info and field values and info about the email_
-- [x] **Page Hit** - _contains contact info and field values, info about the page hit and the page itself_
-- [x] **Form Submitted** - _contains contact info and field values, info about the form and about the submission including submitted values_
+- [x] **Email Viewed** - _contains contact info and field values and info about the email_
+- [x] **New Page Hit** - _contains contact info and field values, info about the page hit and the page itself_
+- [x] **New Form Entry** - _contains contact info and field values, info about the form and about the submission including submitted values_
 
 ### Supported Actions
-- [x] **Create Contact**
+- [x] **Create or Update Contact**
 
 ### 1. Find Mautic integration
 
