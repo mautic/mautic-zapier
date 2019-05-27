@@ -16,7 +16,7 @@ describe('before request middleware', () => {
           password: process.env.TEST_BASIC_AUTH_PASSWORD
         },
         meta: {
-          frontend: true
+          isLoadingSample: true
         }
       };
 
