@@ -34,7 +34,7 @@ describe('form triggers', () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(15000);
 
   });
 });

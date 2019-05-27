@@ -16,7 +16,7 @@ describe('before request middleware', () => {
           password: process.env.TEST_BASIC_AUTH_PASSWORD
         },
         meta: {
-          frontend: true
+          isLoadingSample: true
         }
       };
 
@@ -31,5 +31,5 @@ describe('before request middleware', () => {
           done();
         })
         .catch(done);
-  });
+  }).timeout(15000);
 });

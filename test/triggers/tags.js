@@ -32,6 +32,6 @@ describe('tag triggers', () => {
         done();
       })
       .catch(done);
-  });
+  }).timeout(15000);
 
 });
