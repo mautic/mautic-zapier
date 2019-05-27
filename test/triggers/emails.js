@@ -34,7 +34,7 @@ describe('email triggers', () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(15000);
 
-  }).timeout(15000);
+  });
 });

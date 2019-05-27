@@ -111,6 +111,6 @@ describe('creates', () => {
           done();
         })
         .catch(done);
-    });
+    }).timeout(15000);
   });
 });

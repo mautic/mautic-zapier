@@ -31,5 +31,5 @@ describe('before request middleware', () => {
           done();
         })
         .catch(done);
-  });
+  }).timeout(15000);
 });
