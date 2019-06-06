@@ -15,10 +15,10 @@
     "npm": ">=5.0.0"
   },
   "dependencies": {
-    "zapier-platform-core": "8.1.0"
+    "zapier-platform-core": "8.2.0"
   },
   "devDependencies": {
-    "mocha": "6.1.0",
+    "mocha": "6.1.4",
     "should": "13.2.3"
   }
 }
