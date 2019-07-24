@@ -1,3 +1,8 @@
+## 2.1.5
+
+* SSL issue fix as Zapier support suggested in the issue 15. (the actual fix now)
+* Dependencies updated to latest versions.
+
 ## 2.1.4
 
 * SSL issue fix as Zapier support suggested in the issue 15.
