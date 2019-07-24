@@ -1,3 +1,5 @@
+require("tls").DEFAULT_ECDH_CURVE = "auto";
+
 const ContactUpdatedTrigger = require('./triggers/contactUpdated');
 const ContactCreatedTrigger = require('./triggers/contactCreated');
 const PointsChangedTrigger = require('./triggers/pointsChanged');

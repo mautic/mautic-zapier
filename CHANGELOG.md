@@ -1,3 +1,13 @@
+## 2.1.5
+
+* SSL issue fix as Zapier support suggested in the issue 15. (the actual fix now)
+* Dependencies updated to latest versions.
+
+## 2.1.4
+
+* SSL issue fix as Zapier support suggested in the issue 15.
+* Dependencies updated to latest versions.
+
 ## 2.1.3
 
 * Update of dependencies addressing [code injection vulnerability](https://www.npmjs.com/advisories/813). No big deal, it was only in dev dependencies. But still.
