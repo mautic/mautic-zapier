@@ -1,3 +1,9 @@
+## 2.1.6
+
+* Minimal Node version bumped from 8 to 10.
+* Dependencies updated to latest versions.
+* A failing test fixed as Mautic modified an error message text.
+
 ## 2.1.5
 
 * SSL issue fix as Zapier support suggested in the issue 15. (the actual fix now)
