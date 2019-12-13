@@ -82,7 +82,7 @@ describe('basic auth app', () => {
         done('Should not get here');
       })
       .catch((error) => {
-        error.message.should.containEql('only absolute urls are supported\nWhat happened:\n  Starting GET request to invalidurl/api/contacts\n  only absolute urls are supported');
+        error.message.should.containEql('Only absolute URLs are supported\nWhat happened:\n  Starting GET request to invalidurl/api/contacts\n  Only absolute URLs are supported');
         done();
       });
   }).timeout(15000);
