@@ -12,10 +12,9 @@ describe('user triggers', () => {
     it('should load simple list of users', (done) => {
       const bundle = {
         authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        }
+          access_token: process.env.ACCESS_TOKEN,
+          baseUrl: process.env.BASE_URL+'/',
+        },
       };
 
       appTester(App.triggers.users.operation.perform, bundle)

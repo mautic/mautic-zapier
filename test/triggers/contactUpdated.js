@@ -15,11 +15,10 @@ describe('contact triggers', () => {
       zapier.tools.env.inject();
       const bundle = {
         targetUrl: 'http://provided.by?zapier',
-        authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        }
+          authData: {
+              access_token: process.env.ACCESS_TOKEN,
+              baseUrl: process.env.BASE_URL,
+          },
       };
 
       appTester(App.triggers.contactUpdated.operation.performSubscribe, bundle)
@@ -46,11 +45,10 @@ describe('contact triggers', () => {
       const bundle = {
         targetUrl: 'http://provided.by?zapier',
         subscribeData: subscribeData,
-        authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        }
+          authData: {
+              access_token: process.env.ACCESS_TOKEN,
+              baseUrl: process.env.BASE_URL,
+          },
       };
 
       // Delete the created hook to clean up after previous test and to test delete too
@@ -72,11 +70,10 @@ describe('contact triggers', () => {
     it('should get a list of contact custom fields', (done) => {
       zapier.tools.env.inject();
       const bundle = {
-        authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        }
+          authData: {
+              access_token: process.env.ACCESS_TOKEN,
+              baseUrl: process.env.BASE_URL,
+          },
       };
 
       appTester(App.triggers.contactUpdated.operation.outputFields, bundle)
@@ -108,11 +105,10 @@ describe('contact triggers', () => {
     it('should load contact from list', (done) => {
       zapier.tools.env.inject();
       const bundle = {
-        authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        },
+          authData: {
+              access_token: process.env.ACCESS_TOKEN,
+              baseUrl: process.env.BASE_URL,
+          },
         meta: {
           isLoadingSample: true
         }

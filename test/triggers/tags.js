@@ -8,12 +8,12 @@ const appTester = zapier.createAppTester(App);
 describe('tag triggers', () => {
 
   it('should load a list of tags', (done) => {
+    zapier.tools.env.inject();
     const bundle = {
       authData: {
-        baseUrl: process.env.TEST_BASE_URL,
-        username: process.env.TEST_BASIC_AUTH_USERNAME,
-        password: process.env.TEST_BASIC_AUTH_PASSWORD
-      }
+        access_token: process.env.ACCESS_TOKEN,
+        baseUrl: process.env.BASE_URL,
+      },
     };
 
     appTester(App.triggers.tags.operation.perform, bundle)
