@@ -117,5 +117,5 @@ module.exports = {
   // method after the OAuth flow is complete to ensure everything is setup properly.
   test: testAuth,
   // assuming "username" is a key returned from the test
-  connectionLabel: '{{bundle.authData.username}}',
+  connectionLabel: '{{baseUrl}}',
 };
