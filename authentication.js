@@ -83,8 +83,8 @@ const testAuth = (z , bundle ) => {
 module.exports = {
   type: 'oauth2',
   fields: [
-    {key: 'clientId', type: 'string', required: true},
-    {key: 'clientSecret', type: 'string', required: true},
+    {key: 'clientId', type: 'string', required: true, helpText: 'Your Client ID (Public Key) is available in Mautic > Settings > API Credentials > OAuth 2'},
+    {key: 'clientSecret', type: 'string', required: true, helpText: 'Your Client Secret (Secret Key) is available in Mautic > Settings > API Credentials > OAuth 2'},
     {key: 'baseUrl', type: 'string', required: true, helpText: 'The root URL of your Mautic installation starting with https://. E.g. https://my.mautic.net.'}
   ],
   oauth2Config: {
@@ -97,7 +97,6 @@ module.exports = {
         client_id: '{{bundle.inputData.clientId}}',
         state: '{{bundle.inputData.state}}',
         redirect_uri: '{{bundle.inputData.redirect_uri}}',
-        callback: '{{bundle.inputData.redirect_uri}}',
         response_type: 'code'
       }
     },
