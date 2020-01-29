@@ -92,7 +92,7 @@ describe('form triggers', () => {
           submission.should.have.property('page');
           submission.should.have.property('results');
           submission.should.have.property('contact');
-          //submission.results.should.not.be.empty();
+          submission.results.should.not.be.empty();
           submission.contact.should.not.be.empty();
           submission.contact.id.should.be.greaterThan(0);
 
