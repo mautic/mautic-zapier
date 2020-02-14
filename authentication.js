@@ -51,7 +51,8 @@ const refreshAccessToken = (z, bundle) => {
 
     const result = JSON.parse(response.content);
     return {
-      access_token: result.access_token
+      access_token: result.access_token,
+      refresh_token: result.refresh_token
     };
   });
 };
