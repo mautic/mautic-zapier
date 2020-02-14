@@ -21,5 +21,7 @@ If you'd like to help with development, read the [Zapier tutorial](https://githu
 
 There are functional tests covering the basic functionality.
 
-1. Create `.environment` file in the root of this file and copy there content from `.environment.dist`, fill in the auth details.
-2. Run `zapier test`.
+1. Get access_token of Oauth2 of your Mautic API. You can get it manually by https://developer.mautic.org/#oauth-2 or  by https://github.com/mautic/api-library (or by API tester)
+<img src="https://user-images.githubusercontent.com/462477/74517536-8c4bb980-4f12-11ea-8b1a-9922806ba25f.png" width="300" /> 
+2. Create `.environment` file in the root of this file and copy there content from `.environment.dist`, fill in the BASE_URL and ACCESS_TOKEN generated above.
+3. Run `zapier test`.
