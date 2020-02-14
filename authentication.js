@@ -30,12 +30,12 @@ const getAccessToken = (z, bundle) => {
 };
 
 const refreshAccessToken = (z, bundle) => {
-  const promise = z.request(bundle.inputData.baseUrl+'/oauth/v2/token', {
+  const promise = z.request(bundle.authData.baseUrl+'/oauth/v2/token', {
     method: 'POST',
     body: {
       refresh_token: bundle.authData.refresh_token,
-      client_id: bundle.inputData.clientId,
-      client_secret: bundle.inputData.clientSecret,
+      client_id: bundle.authData.clientId,
+      client_secret: bundle.authData.clientSecret,
       grant_type: 'refresh_token'
     },
     headers: {
