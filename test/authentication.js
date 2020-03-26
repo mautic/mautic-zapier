@@ -30,4 +30,24 @@ describe('oauth2 app', () => {
         }
     );
   });
+
+  it('fails auth on invalid url', (done) => {
+    zapier.tools.env.inject();
+    const bundle = {
+      inputData: {
+        baseUrl: 'invalid',
+        clientId: 'xxx',
+        state: '4444',
+        redirect_uri: 'https://mautic.org/'
+      },
+    };
+
+    appTester(App.authentication.test, bundle)
+        .then(() => {
+          response.status.should.eql(200);
+        })
+        .catch((error) => {
+          done();
+        });
+  }).timeout(5000);
 });
