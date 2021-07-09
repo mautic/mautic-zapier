@@ -1,3 +1,10 @@
+## 2.1.7
+
+* Minimal Node version bumped from 10 to 14.
+* Dependencies updated to latest versions.
+* A link to Zapier Tutorial was updated in the readme
+* The tests will show more details for deprecation warnings
+
 ## 2.1.6
 
 * Minimal Node version bumped from 8 to 10.
