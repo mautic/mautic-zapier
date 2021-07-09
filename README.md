@@ -10,7 +10,7 @@ https://mautic.org/docs/en/plugins/zapier.html
 
 This Zapier integration is developed as an open source project at https://github.com/mautic/mautic-zapier. There is no need to push this integration to Zapier. It already exists and new version deployments are handled by Mautic core team.
 
-If you'd like to help with development, read the [Zapier tutorial](https://github.com/zapier/zapier-platform-cli/wiki/Tutorial) and install all requirements. Then:
+If you'd like to help with development, read the [Zapier tutorial](https://github.com/zapier/zapier-platform/tree/master/packages/cli#quick-setup-guide) and install all requirements. Then:
 
 1. Create a fork of https://github.com/mautic/mautic-zapier
 2. Clone the repository. `git clone git@github.com:[your_github_username]/mautic-zapier.git` (replace [your_github_username])
