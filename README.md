@@ -21,7 +21,11 @@ If you'd like to help with development, read the [Zapier tutorial](https://githu
 
 There are functional tests covering the basic functionality.
 
-1. Get access_token of Oauth2 of your Mautic API. You can get it manually by https://developer.mautic.org/#oauth-2 or  by https://github.com/mautic/api-library (or by API tester)
-<img src="https://user-images.githubusercontent.com/462477/74517536-8c4bb980-4f12-11ea-8b1a-9922806ba25f.png" width="300" /> 
-2. Create `.environment` file in the root of this file and copy there content from `.environment.dist`, fill in the BASE_URL and ACCESS_TOKEN generated above.
-3. Run `zapier test`.
+1. Create new Oauth2 API credentials in your Mautic instance.
+2. Create `.environment` file in the root of this file and copy there content from `.environment.dist`.
+3. Fill in the `BASE_URL` (the domain where your Mautic runs), `TEST_OAUTH2_CLIENT_ID` and `TEST_OAUTH2_CLIENT_SECRET` are the credentials you've created in step 1.
+4. Get access_token of Oauth2 by running `node access-token.js`
+5. It will ask you to click on a URL address. When you do a browser window will open where you'll have to authorize the Oauth2 request.
+6. Once you authorize it will redirect you to a NodeJs server and it will show the access token hash.
+7. Fill in the `ACCESS_TOKEN` generated above to the `environment`.
+8. Run `zapier test`.
