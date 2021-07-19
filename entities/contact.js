@@ -28,7 +28,7 @@ Contact = function(z, bundle) {
     // Fill in the core fields we want to provide
     coreFields.forEach((field) => {
       var type = typeof dirtyContact[field.key];
-      if (type !== 'undefined' && (type === 'string' || type === 'number')) {
+      if (dirtyContact[field.key] == null || (type !== 'undefined' && (type === 'string' || type === 'number'))) {
         contact[field.key] = dirtyContact[field.key];
       }
     });
@@ -45,7 +45,7 @@ Contact = function(z, bundle) {
         }
       }
     }
-
+    
     // Flatten the owner info
     if (dirtyContact.owner && typeof dirtyContact.owner === 'object' && dirtyContact.owner.id) {
       contact.ownedBy = dirtyContact.owner.id;

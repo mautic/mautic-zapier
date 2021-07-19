@@ -1,3 +1,4 @@
-TEST_BASE_URL="http://..."
-TEST_BASIC_AUTH_USERNAME=""
-TEST_BASIC_AUTH_PASSWORD=""
+BASE_URL=""
+ACCESS_TOKEN=
+TEST_OAUTH2_CLIENT_ID="1_6b30vz1xjv0os4go8gcssgsscokssogc0cs4cwcw0s88oswog8"
+TEST_OAUTH2_CLIENT_SECRET="2yeshoapswsg0ccssoswc8wc4co4wwsosgwo4g88c4gg04wc44"

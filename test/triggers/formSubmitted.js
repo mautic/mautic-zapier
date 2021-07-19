@@ -15,11 +15,10 @@ describe('form triggers', () => {
       zapier.tools.env.inject();
       const bundle = {
         targetUrl: 'http://provided.by?zapier',
-        authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        }
+          authData: {
+              access_token: process.env.ACCESS_TOKEN,
+              baseUrl: process.env.BASE_URL,
+          },
       };
 
       appTester(App.triggers.formSubmitted.operation.performSubscribe, bundle)
@@ -46,11 +45,10 @@ describe('form triggers', () => {
       const bundle = {
         targetUrl: 'http://provided.by?zapier',
         subscribeData: subscribeData,
-        authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        }
+          authData: {
+              access_token: process.env.ACCESS_TOKEN,
+              baseUrl: process.env.BASE_URL,
+          },
       };
 
       // Delete the created hook to clean up after previous test and to test delete too
@@ -72,9 +70,8 @@ describe('form triggers', () => {
     it('should load a submission via API', (done) => {
       const bundle = {
         authData: {
-          baseUrl: process.env.TEST_BASE_URL,
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
+              access_token: process.env.ACCESS_TOKEN,
+              baseUrl: process.env.BASE_URL,
         },
         inputData: {
           formId: 1,

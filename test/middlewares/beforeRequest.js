@@ -10,11 +10,10 @@ describe('before request middleware', () => {
   it('Removes double slashes if the URL has a trailing slash', (done) => {
     zapier.tools.env.inject();
       const bundle = {
-        authData: {
-          baseUrl: process.env.TEST_BASE_URL+'/',
-          username: process.env.TEST_BASIC_AUTH_USERNAME,
-          password: process.env.TEST_BASIC_AUTH_PASSWORD
-        },
+          authData: {
+              access_token: process.env.ACCESS_TOKEN,
+              baseUrl: process.env.BASE_URL+'/',
+          },
         meta: {
           isLoadingSample: true
         }
