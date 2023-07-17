@@ -124,7 +124,6 @@ module.exports = {
   display: {
     label: 'New Form Entry',
     description: 'Triggers when a form is submitted.',
-    important: true
   },
   operation: {
     type: 'hook',

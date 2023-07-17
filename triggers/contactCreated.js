@@ -7,7 +7,6 @@ module.exports = {
   display: {
     label: 'New Contact',
     description: 'Triggers when a new contact is created.',
-    important: true
   },
   operation: {
     type: 'hook',
