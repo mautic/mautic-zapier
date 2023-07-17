@@ -1,3 +1,7 @@
+## 2.1.8
+
+* Dependencies updated to latest versions via Dependabot to avoid using dependencies with known security issues.
+
 ## 2.1.7
 
 * Minimal Node version bumped from 10 to 14.
